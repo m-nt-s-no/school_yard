@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_08_190224) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_08_191340) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
+
+  create_table "groups", force: :cascade do |t|
+    t.citext "name"
+    t.bigint "leader_id", null: false
+    t.integer "enrollments_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["leader_id"], name: "index_groups_on_leader_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.citext "email", default: "", null: false
@@ -34,4 +43,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_08_190224) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "groups", "users", column: "leader_id"
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :groups
   # Routes for the Group resource:
   # CREATE
   post("/insert_group", { :controller => "groups", :action => "create" })

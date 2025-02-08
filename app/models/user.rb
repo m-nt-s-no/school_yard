@@ -30,4 +30,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   enum role: {guardian: "guardian", teacher: "teacher"}
+
+  has_many :groups, class_name: "Group", foreign_key: "leader_id"
 end
