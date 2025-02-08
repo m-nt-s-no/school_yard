@@ -5,15 +5,15 @@
 #  id                      :bigint           not null, primary key
 #  email                   :citext           default(""), not null
 #  encrypted_password      :string           default(""), not null
-#  enrollments_count       :integer
+#  enrollments_count       :integer          default(0)
 #  image                   :string
 #  name                    :citext
-#  received_messages_count :integer
+#  received_messages_count :integer          default(0)
 #  remember_created_at     :datetime
 #  reset_password_sent_at  :datetime
 #  reset_password_token    :string
 #  role                    :string
-#  sent_messages_count     :integer
+#  sent_messages_count     :integer          default(0)
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #
