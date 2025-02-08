@@ -29,5 +29,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  enum role: {parent: "parent", teacher: "teacher"}
+  enum role: {guardian: "guardian", teacher: "teacher"}
 end
