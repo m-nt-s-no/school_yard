@@ -19,4 +19,7 @@
 #
 class Group < ApplicationRecord
   belongs_to :leader, class_name: "User"
+  has_many  :events, dependent: :destroy
+  has_many  :enrollments, dependent: :destroy
+  has_many :members, through: :enrollments, source: :user
 end

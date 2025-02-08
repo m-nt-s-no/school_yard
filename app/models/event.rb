@@ -22,4 +22,7 @@
 #
 class Event < ApplicationRecord
   belongs_to :group
+  has_one  :leader, through: :group, source: :users
+  scope :past, -> {where('ends_at < ?', Time.now)}
+  scope :upcoming, -> {where('starts_at > ?', Time.now)}
 end

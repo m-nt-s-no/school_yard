@@ -28,10 +28,15 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+
+  validates :name, presence: true
   enum role: {guardian: "guardian", teacher: "teacher"}
 
-  has_many :groups, class_name: "Group", foreign_key: "leader_id"
-  has_many :sent_messages, class_name: "Message", foreign_key: "sender_id"
-  has_many :received_messages, class_name: "Message", foreign_key: "recipient_id"
+  has_many :groups, class_name: "Group", foreign_key: "leader_id", dependent: :nullify
+  has_many :sent_messages, class_name: "Message", foreign_key: "sender_id", dependent: :nullify
+  has_many :received_messages, class_name: "Message", foreign_key: "recipient_id", dependent: :nullify
+  has_many :enrollments, dependent: :destroy
+
+  has_many :events, through: :groups, source: :events
+  has_many :membership_groups, through: :enrollments, source: :group
 end
