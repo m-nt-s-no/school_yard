@@ -32,4 +32,6 @@ class User < ApplicationRecord
   enum role: {guardian: "guardian", teacher: "teacher"}
 
   has_many :groups, class_name: "Group", foreign_key: "leader_id"
+  has_many :sent_messages, class_name: "Message", foreign_key: "sender_id"
+  has_many :received_messages, class_name: "Message", foreign_key: "recipient_id"
 end

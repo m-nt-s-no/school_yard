@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_08_192119) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_08_192410) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -29,6 +29,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_08_192119) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["leader_id"], name: "index_groups_on_leader_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "sender_id", null: false
+    t.bigint "recipient_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id"], name: "index_messages_on_recipient_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,4 +61,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_08_192119) do
   end
 
   add_foreign_key "groups", "users", column: "leader_id"
+  add_foreign_key "messages", "users", column: "recipient_id"
+  add_foreign_key "messages", "users", column: "sender_id"
 end
