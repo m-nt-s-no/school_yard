@@ -96,6 +96,7 @@ group :development do
   gem "pry-rails"
   gem "rails_db"
   gem "rails-erd"
+  gem "rubocop-rails-omakase", require: false
   gem "rufo"
   gem "specs_to_readme"
 end
