@@ -20,6 +20,10 @@
 class Group < ApplicationRecord
   belongs_to :leader, class_name: "User"
   has_many  :events, dependent: :destroy
-  has_many  :enrollments, dependent: :destroy
+  has_many :past_events, -> { past }, foreign_key: :group_id, class_name: "Event"
+  has_many :upcoming_events, -> { upcoming }, foreign_key: :group_id, class_name: "Event"
+  has_many :enrollments, dependent: :destroy
   has_many :members, through: :enrollments, source: :user
+  has_many :teacher_members, -> { where(role: "teacher") }, through: :members,  source: :user
+  has_many :guardian_members, -> { where(role: "guardian") }, through: :members, source: :user
 end

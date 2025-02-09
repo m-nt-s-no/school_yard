@@ -36,7 +36,6 @@ class User < ApplicationRecord
   has_many :sent_messages, class_name: "Message", foreign_key: "sender_id", dependent: :nullify
   has_many :received_messages, class_name: "Message", foreign_key: "recipient_id", dependent: :nullify
   has_many :enrollments, dependent: :destroy
-
   has_many :events, through: :groups, source: :events
   has_many :membership_groups, through: :enrollments, source: :group
 end
