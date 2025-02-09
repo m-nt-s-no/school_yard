@@ -25,4 +25,7 @@ class Event < ApplicationRecord
   has_one  :leader, through: :group, source: :users
   scope :past, -> {where('ends_at < ?', Time.now)}
   scope :upcoming, -> {where('starts_at > ?', Time.now)}
+  validates :name, presence: true
+  validates :starts_at, presence: true
+  validates :ends_at, presence: true
 end

@@ -28,14 +28,14 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-  validates :name, presence: true
   enum role: {guardian: "guardian", teacher: "teacher"}
+  validates :name, presence: true
+  validates :role, presence: true
 
   has_many :groups, class_name: "Group", foreign_key: "leader_id", dependent: :nullify
   has_many :sent_messages, class_name: "Message", foreign_key: "sender_id", dependent: :nullify
   has_many :received_messages, class_name: "Message", foreign_key: "recipient_id", dependent: :nullify
-  has_many :enrollments, dependent: :destroy
-  has_many :events, through: :groups, source: :events
+  has_many :enrollments, class_name: "Enrollment", foreign_key: "user_id", dependent: :destroy
+  has_many :schedule, through: :groups, source: :events
   has_many :membership_groups, through: :enrollments, source: :group
 end
