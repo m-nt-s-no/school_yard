@@ -32,10 +32,10 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :role, presence: true
 
-  has_many :groups, class_name: "Group", foreign_key: "leader_id", dependent: :nullify
+  has_many :groups_they_lead, class_name: "Group", foreign_key: "leader_id", dependent: :nullify
   has_many :sent_messages, class_name: "Message", foreign_key: "sender_id", dependent: :nullify
   has_many :received_messages, class_name: "Message", foreign_key: "recipient_id", dependent: :nullify
   has_many :enrollments, class_name: "Enrollment", foreign_key: "user_id", dependent: :destroy
-  has_many :schedule, through: :groups, source: :events
   has_many :membership_groups, through: :enrollments, source: :group
+  has_many :schedule, through: :membership_groups, source: :events
 end
