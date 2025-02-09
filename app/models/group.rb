@@ -25,6 +25,6 @@ class Group < ApplicationRecord
   has_many :upcoming_events, -> { upcoming }, foreign_key: :group_id, class_name: "Event"
   has_many :enrollments, class_name: "Enrollment", foreign_key: "group_id", dependent: :destroy
   has_many :members, through: :enrollments, source: :user
-  has_many :teacher_members, -> { where(role: "teacher") }, through: :members,  source: :user
-  has_many :guardian_members, -> { where(role: "guardian") }, through: :members, source: :user
+  has_many :teacher_members, -> { where(role: "teacher") }, through: :enrollments, source: :user
+  has_many :guardian_members, -> { where(role: "guardian") }, through: :enrollments, source: :user
 end
