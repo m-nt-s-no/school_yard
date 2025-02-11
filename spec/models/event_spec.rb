@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id         :bigint           not null, primary key
+#  address    :string
+#  ends_at    :datetime
+#  name       :citext           default(""), not null
+#  notes      :text
+#  starts_at  :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  group_id   :bigint           not null
+#
+# Indexes
+#
+#  index_events_on_group_id  (group_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (group_id => groups.id)
+#
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do

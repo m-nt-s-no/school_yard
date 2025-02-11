@@ -23,4 +23,13 @@ class Message < ApplicationRecord
   belongs_to :sender, class_name: "User", counter_cache: :sent_messages_count
   belongs_to :recipient, class_name: "User", counter_cache: :received_messages_count
   validates :content, presence: true
+  validate :cannot_send_message_to_self
+
+  private
+
+  def cannot_send_message_to_self
+    if sender_id == recipient_id
+      errors.add(:sender_id, "cannot send yourself a message")
+    end
+  end
 end
