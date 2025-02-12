@@ -26,6 +26,11 @@ jobs:
         rbenv global 3.2.1
         ruby -v
 
+    - name: Verify rbenv installation
+      run: |
+        source ~/.bashrc
+        rbenv --version
+
     - name: Install dependencies
       run: |
         gem install bundler
