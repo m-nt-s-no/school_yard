@@ -9,25 +9,28 @@ task({ :sample_data => :environment }) do
     User.destroy_all
   end
 
-  User.create!(
-    name: "Max", 
-    email: "max@example.com", 
-    password: 'password', 
-    role: 'teacher'
-    )
-
   counter = 1
   12.times do
     name = Faker::Movies::Lebowski.character
     first_name = name.split[0]
     user = User.create!(
       name: name, 
+      image: Faker::Avatar.image,
       email: "#{first_name}_#{counter}@example.com", 
       password: 'password', 
       role: ['teacher', 'guardian'].sample
     )
     counter += 1
   end
+
+  max = User.create!(
+    name: "Max",
+    image: Faker::Avatar.image,
+    email: "max@example.com", 
+    password: 'password', 
+    role: 'teacher'
+    )
+
   p "There are #{User.count} users."
 
   12.times do
@@ -57,7 +60,7 @@ task({ :sample_data => :environment }) do
 
   24.times do
     start_time = Faker::Time.between(from: DateTime.now - 30, to: DateTime.now + 30)
-    end_time = start_time + 1
+    end_time = start_time + 3600
     event = Event.create!(
       name: Faker::Lorem.sentence(word_count: 3), 
       starts_at: start_time, 

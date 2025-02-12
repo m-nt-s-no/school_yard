@@ -1,3 +1,29 @@
 <h1>
   <%= @user.name %>
 </h1>
+<div>
+  <%= image_tag @user.image %>
+</div>
+<h3>
+  <%= @user.role %>
+</h3>
+<h4>
+  Their groups:
+</h4>
+<ul>
+  <% @user.groups_they_lead.each do |group| %>
+  <li>
+    <%= group.name %>
+  </li>
+  <% end %>
+</ul>
+<h4>
+  Other group memberships:
+</h4>
+<ul>
+  <% @user.membership_groups.each do |group| %>
+  <li>
+    <%= group.name %>
+  </li>
+  <% end %>
+</ul>
