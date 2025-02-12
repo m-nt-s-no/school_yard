@@ -22,10 +22,11 @@ class MessagesController < ApplicationController
   # POST /messages or /messages.json
   def create
     @message = Message.new(message_params)
+    @message.sender = current_user
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to message_url(@message), notice: "Message was successfully created." }
+        format.html { redirect_back fallback_location: root_path, notice: "Message was successfully created." }
         format.json { render :show, status: :created, location: @message }
       else
         format.html { render :new, status: :unprocessable_entity }
