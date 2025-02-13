@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   resources :events
   resources :messages
 
-  #get ":username/events" => "users#events", as: :events
-  #get ":username/groups" => "users#groups", as: :groups
-  #get ":username/messages" => "users#messages", as: :messages
-  #get ":username/calendar" => "users#calendar", as: :calendar
+  #get ":name/events" => "users#events", as: :events
+  #get ":name/groups" => "users#groups", as: :groups
+  #get ":name/messages" => "users#messages", as: :messages
+  #get ":name/calendar" => "users#calendar", as: :calendar
   #get "/directory" => "users#index", as: :directory
   get ":name" => "users#show", as: :user
 end
