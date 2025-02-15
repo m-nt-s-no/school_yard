@@ -1,0 +1,26 @@
+
+
+    <div class="card">
+      <div class="card-header">
+        Your upcoming events:
+      </div>
+      <ul class="list-group list-group-flush">
+      <% @user.membership_groups.each do |group| %>
+          <% group.upcoming_events do |event| %>
+            <li class="list-group-item"><%= event.name %></li>
+          <% end %>
+      <% end %>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        Your past events:
+      </div>
+      <ul class="list-group list-group-flush">
+      <% @user.membership_groups.each do |group| %>
+          <% group.past_events do |event| %>
+            <li class="list-group-item"><%= event.name %></li>
+          <% end %>
+      <% end %>
+      </ul>
+    </div>

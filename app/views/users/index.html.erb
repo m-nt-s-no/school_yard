@@ -1,0 +1,8 @@
+<h1>Users</h1>
+
+<div id="users">
+  <% @users.each do |user| %>
+    <%= render "users/user", user: user %>
+      <%= link_to "Show this user", user.name %>
+  <% end %>
+</div>
