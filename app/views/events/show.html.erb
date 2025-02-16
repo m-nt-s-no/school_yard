@@ -4,7 +4,7 @@
 <div>
   <%= link_to "Edit this event", edit_event_path(@event) %> |
   <%= link_to "All events", events_path %> |
-  <%= link_to "Back to calendar", my_calendar_path(current_user.name) %>
+  <%= link_to "My calendar", my_calendar_path(current_user.name) %>
 
   <%= button_to "Destroy this event", @event, method: :delete %>
 </div>
