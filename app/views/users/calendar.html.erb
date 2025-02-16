@@ -4,7 +4,7 @@
     <% @my_calendar.each do |event| %>
       <% if event.starts_at.to_date == date %>
         <div>
-          <%= link_to "#{event.name}", event %> <!--- need to add "back to calendar" link in event view --->
+          <%= link_to "#{event.name}", event %>
         </div>
       <% end %>
     <% end %>
