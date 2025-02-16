@@ -1,10 +1,10 @@
 <%= month_calendar(attribute: :starts_at, end_attribute: :ends_at) do |date| %>
-  <%= date %>
+  <%= date.day %>
 
     <% @my_calendar.each do |event| %>
       <% if event.starts_at.to_date == date %>
         <div>
-          <%= link_to "#{event.name}", event %>
+          <%= link_to "#{event.name}", event %> <!--- need to add "back to calendar" link in event view --->
         </div>
       <% end %>
     <% end %>
