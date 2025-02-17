@@ -14,7 +14,7 @@
           <% group.upcoming_events.each do |event| %>
             <li class="list-group-item list-group-item-action">
               <%= link_to "#{event.name}", event %>
-              in <%= time_ago_in_words(event.ends_at) %>
+              in <%= time_ago_in_words(event.starts_at) %>
             </li>
           <% end %>
         <% end %>
