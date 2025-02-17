@@ -1,9 +1,8 @@
 <div class="row mb-4">
   <div class="col-md-6 offset-md-3">
-    <%= render @user %>
     <%= render "users/groups", user: @user %>
     <div class="card-body">
-          <%= render "messages/form", message: Message.new(recipient_id: @user.id) %>
+          <%= link_to "Create a new group", new_group_path(Group.new) %>
     </div>
   </div>
 </div>

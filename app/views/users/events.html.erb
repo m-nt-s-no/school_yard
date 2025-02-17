@@ -7,14 +7,14 @@
       <div class="card-body">
         <ul class="list-group list-group-flush">
         <% @user.membership_groups.each do |group| %>
-          <% if group.upcoming_events.count > 0 %>
+          <% next if group.upcoming_events.count == 0 %>
             <div class="fw-bold">
               <%= link_to "#{group.name}", group %>
             </div>
-          <% end %>
           <% group.upcoming_events.each do |event| %>
             <li class="list-group-item list-group-item-action">
               <%= link_to "#{event.name}", event %>
+              in <%= time_ago_in_words(event.ends_at) %>
             </li>
           <% end %>
         <% end %>
@@ -29,14 +29,14 @@
       <div class="card-body">
         <ul class="list-group list-group-flush">
         <% @user.membership_groups.each do |group| %>
-          <% if group.past_events.count > 0 %>
+          <% next if group.past_events.count == 0 %>
             <div class="fw-bold">
               <%= link_to "#{group.name}", group %>
             </div>
-          <% end %>
           <% group.past_events.each do |event| %>
             <li class="list-group-item list-group-item-action">
               <%= link_to "#{event.name}", event %>
+              <%= time_ago_in_words(event.ends_at) %> ago
             </li>
           <% end %>
         <% end %>

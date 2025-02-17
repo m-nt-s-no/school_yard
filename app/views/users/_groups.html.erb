@@ -1,0 +1,21 @@
+    <div class="card">
+      <div class="card-header">
+        <%= @user.name %> leads these groups:
+      </div>
+      <ul class="list-group list-group-flush">
+      <% @user.groups_they_lead.each do |group| %>
+        <li class="list-group-item"><%= link_to "#{group.name}", group %></li>
+      <% end %>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <%= @user.name %> is also a member of these groups:
+      </div>
+      <ul class="list-group list-group-flush">
+      <% @user.membership_groups.each do |group| %>
+        <% next if @user.groups_they_lead.include?(group) %>
+        <li class="list-group-item"><%= link_to "#{group.name}", group %></li>
+      <% end %>
+      </ul>
+    </div>
