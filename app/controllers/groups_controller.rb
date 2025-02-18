@@ -13,6 +13,7 @@ class GroupsController < ApplicationController
   # GET /groups/new
   def new
     @group = Group.new
+    @group.enrollments.build
   end
 
   # GET /groups/1/edit
@@ -66,6 +67,6 @@ class GroupsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def group_params
-      params.require(:group).permit(:name)
+      params.require(:group).permit(:name, enrollments_attributes: [:user_id, :_destroy])
     end
 end
