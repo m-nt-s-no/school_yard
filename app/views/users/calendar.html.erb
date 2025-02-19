@@ -1,12 +1,31 @@
-<%= month_calendar(attribute: :starts_at, end_attribute: :ends_at) do |date| %>
-  <%= date.day %>
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
 
-    <% @my_calendar.each do |event| %>
-      <% if event.starts_at.to_date == date %>
-        <div>
-          <%= link_to "#{event.name}", event %>
-        </div>
-      <% end %>
+    <ul class="nav nav-pills nav-justified">
+      <li class="nav-item">
+        <%= link_to "My events", my_events_path(@user.name), class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "My groups", my_groups_path(@user.name), class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "My messages", my_messages_path(@user.name), class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "My calendar", my_calendar_path(@user.name), class: "nav-link active" %>
+      </li>
+    </ul>
+
+    <%= month_calendar(attribute: :starts_at, end_attribute: :ends_at) do |date| %>
+      <%= date.day %>
+
+        <% @my_calendar.each do |event| %>
+          <% if event.starts_at.to_date == date %>
+            <div>
+              <%= link_to "#{event.name}", event %>
+            </div>
+          <% end %>
+        <% end %>
     <% end %>
-
-<% end %>
+  </div>
+</div>

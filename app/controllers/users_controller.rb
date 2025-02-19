@@ -15,6 +15,8 @@ class UsersController < ApplicationController
   end
 
   def messages
+    @received_msgs = @user.received_messages.order(created_at: :desc)
+    @sent_msgs = @user.sent_messages.order(created_at: :desc)
   end
 
   def calendar

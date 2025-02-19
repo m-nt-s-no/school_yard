@@ -1,5 +1,21 @@
 <div class="row mb-4">
   <div class="col-md-6 offset-md-3">
+
+    <ul class="nav nav-pills nav-justified">
+      <li class="nav-item">
+        <%= link_to "My events", my_events_path(@user.name), class: "nav-link active" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "My groups", my_groups_path(@user.name), class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "My messages", my_messages_path(@user.name), class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "My calendar", my_calendar_path(@user.name), class: "nav-link" %>
+      </li>
+    </ul>
+
     <div class="card">
       <div class="card-header">
         Your upcoming events:
@@ -9,7 +25,7 @@
         <% @user.membership_groups.each do |group| %>
           <% next if group.upcoming_events.count == 0 %>
             <div class="fw-bold">
-              <%= link_to "#{group.name}", group %>
+              <%= "#{group.name}" %>
             </div>
           <% group.upcoming_events.each do |event| %>
             <li class="list-group-item list-group-item-action">
@@ -31,7 +47,7 @@
         <% @user.membership_groups.each do |group| %>
           <% next if group.past_events.count == 0 %>
             <div class="fw-bold">
-              <%= link_to "#{group.name}", group %>
+              <%= "#{group.name}" %>
             </div>
           <% group.past_events.each do |event| %>
             <li class="list-group-item list-group-item-action">

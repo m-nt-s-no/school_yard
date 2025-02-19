@@ -1,8 +1,13 @@
-<h1>Users</h1>
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
 
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render "users/user", user: user %>
-      <%= link_to "Show this user", user.name %>
-  <% end %>
+    <h1>Users</h1>
+
+    <div id="users">
+      <% @users.each do |user| %>
+        <%= render "users/user", user: user %>
+          <%= link_to "Show this user", user.name %>
+      <% end %>
+    </div>
+  </div>
 </div>
