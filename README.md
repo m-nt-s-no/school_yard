@@ -15,10 +15,10 @@ Adding a calendar to a school’s messaging app would make that information easi
 ## Installation
 
 1. Clone the repository:
-`git clone https://github.com/m-nt-s-no/SchoolYard.git`
+`git clone https://github.com/m-nt-s-no/school_yard.git`
 
 2. Navigate to the project directory:
-`cd SchoolYard`
+`cd school_yard`
 
 3. Install the required gems:
 `bundle install`
@@ -57,4 +57,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 
 Max J. Montesino - [mjmontesino88@gmail.com](mailto:mjmontesino88@gmail.com)
-Project Link: [https://github.com/m-nt-s-no/SchoolYard](https://github.com/m-nt-s-no/SchoolYard)
+Project Link: [https://github.com/m-nt-s-no/school_yard](https://github.com/m-nt-s-no/school_yard)
