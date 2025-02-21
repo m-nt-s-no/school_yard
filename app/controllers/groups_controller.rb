@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: %i[ show edit update destroy ]
+  before_action :ensure_current_user_is_group_leader, only: [:destroy, :update, :edit]
 
   # GET /groups or /groups.json
   def index
@@ -63,6 +64,13 @@ class GroupsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_group
       @group = Group.find(params[:id])
+    end
+
+    # Only a group's leader can destroy, update, or edit a group
+    def ensure_current_user_is_group_leader
+      if current_user != @group.leader
+        redirect_to group_url(@group), alert: "You're not authorized for that."
+      end
     end
 
     # Only allow a list of trusted parameters through.
