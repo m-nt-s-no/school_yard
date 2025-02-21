@@ -21,7 +21,6 @@ class UsersController < ApplicationController
 
   def calendar
     start_date = Date.today.to_date
-    @my_calendar = @user.calendar.where(starts_at: start_date.beginning_of_month..start_date.end_of_month)
   end
 
   private
