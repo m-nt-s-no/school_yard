@@ -1,28 +1,22 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only: %i[ show edit update destroy ]
-
-  # GET /messages or /messages.json
-  def index
-    @messages = Message.all
-  end
+  before_action :set_message, only: %i[ show destroy ]
 
   # GET /messages/1 or /messages/1.json
   def show
+    authorize @message
   end
 
   # GET /messages/new
   def new
     @message = Message.new
-  end
-
-  # GET /messages/1/edit
-  def edit
+    authorize @message
   end
 
   # POST /messages or /messages.json
   def create
     @message = Message.new(message_params)
     @message.sender = current_user
+    authorize @message
 
     respond_to do |format|
       if @message.save
@@ -35,21 +29,9 @@ class MessagesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /messages/1 or /messages/1.json
-  def update
-    respond_to do |format|
-      if @message.update(message_params)
-        format.html { redirect_to message_url(@message), notice: "Message was successfully updated." }
-        format.json { render :show, status: :ok, location: @message }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # DELETE /messages/1 or /messages/1.json
   def destroy
+    authorize @message
     @message.destroy!
 
     respond_to do |format|
