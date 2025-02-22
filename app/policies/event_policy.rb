@@ -15,7 +15,7 @@ class EventPolicy < ApplicationPolicy
     @user.role == "teacher"
   end
 
-  #only a event's leader can edit/update/destroy the event
+  #only a event's group leader can edit/update/destroy the event
   def edit?
     @user == @event.group.leader
   end

@@ -2,9 +2,12 @@
 <%= render @event %>
 
 <div>
-  <%= link_to "Edit this event", edit_event_path(@event) %> |
+  <% if current_user == @event.group.leader %>
+    <%= link_to "Edit this event", edit_event_path(@event) %> |
+  <% end %>
   <%= link_to "My events", my_events_path(current_user.name) %> |
   <%= link_to "My calendar", my_calendar_path(current_user.name) %>
-
-  <%= button_to "Destroy this event", @event, method: :delete %>
+  <% if current_user == @event.group.leader %>
+    <%= button_to "Destroy this event", @event, method: :delete %>
+  <% end %>
 </div>
