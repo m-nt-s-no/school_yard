@@ -4,11 +4,13 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/new
   def new
     @enrollment = Enrollment.new
+    authorize @enrollment
   end
 
   # POST /enrollments or /enrollments.json
   def create
     @enrollment = Enrollment.new(enrollment_params)
+    authorize @enrollment
 
     respond_to do |format|
       if @enrollment.save
@@ -23,6 +25,7 @@ class EnrollmentsController < ApplicationController
 
   # DELETE /enrollments/1 or /enrollments/1.json
   def destroy
+    authorize @enrollment
     @enrollment.destroy!
 
     respond_to do |format|

@@ -16,6 +16,11 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  #only group leader can create new events/groups so only they should see the link to do so
+  def show_create_link?
+    @user.role == "teacher"
+  end
+
   #users should only see their own events, groups, messages, calendar
   def events?
     user == current_user

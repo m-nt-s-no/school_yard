@@ -17,8 +17,11 @@
     </ul>
 
     <%= render "users/groups", user: @user %>
-    <div class="card-body">
-          <%= link_to "Create a new group", new_group_path(Group.new) %>
-    </div>
+
+    <% if policy(@group).edit? %>
+      <div class="card-body">
+            <%= link_to "Create a new group", new_group_path(Group.new) %>
+      </div>
+    <% end %>
   </div>
 </div>

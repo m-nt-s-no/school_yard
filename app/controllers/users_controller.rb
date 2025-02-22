@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show events groups messages calendar ]
+  before_action :set_user, only: %i[ index show events groups messages calendar ]
 
   def index
-    if current_user.role == "teacher"
+    if @user.role == "teacher"
       @users = User.all
     else
       @users = User.where(:role => "teacher") #parents cannot see other parents in directory

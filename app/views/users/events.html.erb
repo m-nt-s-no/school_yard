@@ -60,9 +60,10 @@
       </div>
     </div>
 
-    <div class="card-body">
-      <%= link_to "Create a new event", new_event_path(Event.new) %>
-      <!---would prefer rendering form here: render "events/form", event:Event.new --->
-    </div>
+    <% if policy(@user).show_create_link? %>
+      <div class="card-body">
+        <%= link_to "Create a new event", new_event_path(Event.new) %>
+      </div>
+    <% end %>
   </div>
 </div>
