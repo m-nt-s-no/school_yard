@@ -10,6 +10,11 @@ class MessagesController < ApplicationController
   def new
     @message = Message.new
     authorize @message
+    if current_user.role == "guardian"
+      @allowed_recipients = User.where(role: "teacher")
+    else
+      @allowed_recipients = User.where.not(id: current_user.id)
+    end
   end
 
   # POST /messages or /messages.json
