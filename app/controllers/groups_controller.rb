@@ -16,12 +16,13 @@ class GroupsController < ApplicationController
   # GET /groups/new
   def new
     @group = Group.new
-    @group.enrollments.build
+    3.times { @group.enrollments.build }
     authorize @group
   end
 
   # GET /groups/1/edit
   def edit
+    @group.enrollments.build if @group.enrollments.none? { |e| e.new_record? }
     authorize @group
   end
 

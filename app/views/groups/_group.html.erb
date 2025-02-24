@@ -14,4 +14,12 @@
     <%= group.enrollments_count %>
   </p>
 
+  <% if policy(group).show_members? %>
+    <p>
+      <strong>Members:</strong>
+      <% group.members.each do |member| %>
+        <p><%= member.name %></p>
+      <% end %>
+    </p>
+  <% end %>
 </div>

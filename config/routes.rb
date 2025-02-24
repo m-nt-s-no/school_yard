@@ -3,8 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :groups, except: [:index]
-  resources :enrollments, only: [:create, :destroy]
+  resources :groups, except: [:index] do
+    resources :enrollments, only: [:create, :destroy]
+  end
   resources :events, except: [:index]
   resources :messages, only: [:show, :new, :create, :destroy]
 

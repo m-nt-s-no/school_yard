@@ -6,7 +6,8 @@
   <% if current_user == @group.leader %>
     <%= link_to "Edit this group", edit_group_path(@group) %> |
   <% end %>
-  <%= link_to "Back to my groups", my_groups_path(current_user.name) %>
+  <%= link_to "Directory", directory_path(current_user.name) %> |
+  <%= link_to "My groups", my_groups_path(current_user.name) %>
   <% if current_user == @group.leader %>
     <%= button_to "Destroy this group", @group, method: :delete %>
   <% end %>
