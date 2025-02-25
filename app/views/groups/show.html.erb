@@ -1,14 +1,17 @@
-
-<%= render @group %>
-
-
-<div>
-  <% if current_user == @group.leader %>
-    <%= link_to "Edit this group", edit_group_path(@group) %> |
-  <% end %>
-  <%= link_to "Directory", directory_path(current_user.name) %> |
-  <%= link_to "My groups", my_groups_path(current_user.name) %>
-  <% if current_user == @group.leader %>
-    <%= button_to "Destroy this group", @group, method: :delete %>
-  <% end %>
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
+    <%= render @group %>
+    <div>
+      <% if current_user == @group.leader %>
+        <%= link_to "Edit this group", edit_group_path(@group) %> |
+      <% end %>
+      <%= link_to "Directory", directory_path(current_user.name) %> |
+      <%= link_to "My groups", my_groups_path(current_user.name) %>
+      <% if current_user == @group.leader %>
+        <div class="btn btn-outline-danger">
+        <%= button_to "Destroy this group", @group, method: :delete %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

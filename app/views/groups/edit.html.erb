@@ -1,10 +1,15 @@
-<h1>Editing group</h1>
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
 
-<%= render "form", group: @group %>
+    <h3>Edit group</h3>
 
-<br>
+    <%= render "form", group: @group %>
 
-<div>
-  <%= link_to "Show this group", @group %> |
-  <%= link_to "Back to my groups", my_groups_path(current_user.name) %>
+    <br>
+
+    <div>
+      <%= link_to "Show this group", @group %> |
+      <%= link_to "Back to my groups", my_groups_path(current_user.name) %>
+    </div>
+  </div>
 </div>
