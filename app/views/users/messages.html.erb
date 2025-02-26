@@ -18,14 +18,16 @@
 
     <div class="card">
       <div class="card-header">
-        Your received messages:
+        <h6>Your received messages:</h6>
       </div>
       <div class="card-body">
         <ul class="list-group list-group-flush">
         <% @received_msgs.each do |msg| %>
             <li class="list-group-item list-group-item-action">
-              <%= link_to "#{msg.sender.name}", msg %>
-              <%= time_ago_in_words(msg.created_at) %> ago
+              <div class="d-flex align-items-center justify-content-between">
+                <%= link_to "#{msg.sender.name}", msg %>
+                <em><%= time_ago_in_words(msg.created_at) %> ago</em>
+              </div>
             </li>
         <% end %>
         </ul>
@@ -34,14 +36,16 @@
 
     <div class="card">
       <div class="card-header">
-        Your sent messages:
+        <h6>Your sent messages:</h6>
       </div>
       <div class="card-body">
         <ul class="list-group list-group-flush">
         <% @sent_msgs.each do |msg| %>
             <li class="list-group-item list-group-item-action">
-              <%= link_to "#{msg.recipient.name}", msg %>
-              <%= time_ago_in_words(msg.created_at) %> ago
+              <div class="d-flex align-items-center justify-content-between">
+                <%= link_to "#{msg.recipient.name}", msg %>
+                <em><%= time_ago_in_words(msg.created_at) %> ago</em>
+              </div>
             </li>
         <% end %>
         </ul>

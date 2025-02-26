@@ -1,7 +1,7 @@
     <% if @user.role == "teacher" %>
       <div class="card">
         <div class="card-header">
-          <%= @user.name %> leads these groups:
+          <h6>You lead these groups:</h6>
         </div>
         <ul class="list-group list-group-flush">
         <% @user.groups_they_lead.each do |group| %>
@@ -12,7 +12,7 @@
     <% end %>
     <div class="card">
       <div class="card-header">
-        <%= @user.name %> is a member of these groups:
+        <h6>You are a member of these groups:</h6>
       </div>
       <ul class="list-group list-group-flush">
       <% @user.membership_groups.each do |group| %>

@@ -1,9 +1,13 @@
-<h1>New event</h1>
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
+    <h1 class="display-6">New event</h1>
 
-<%= render "form", event: @event %>
+    <%= render "form", event: @event %>
 
-<br>
+    <br>
 
-<div>
-  <%= link_to "Back to my events", my_events_path(current_user.name) %>
+    <div>
+      <%= link_to "Back to my events", my_events_path(current_user.name) %>
+    </div>
+  </div>
 </div>
