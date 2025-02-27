@@ -17,7 +17,7 @@
     </ul>
 
       <%= month_calendar(attribute: :starts_at, end_attribute: :ends_at) do |date| %>
-        <div class="card">
+        <div class="card <%= 'bg-primary text-white'if date.today? %>">
           <div class="card-body">
             <h6 class="card-title">
               <%= date.day %>
@@ -26,8 +26,13 @@
               <% @user.calendar.each do |event| %>
                 <% if event.starts_at.to_date == date %>
                   <div>
-                    <i class="fa-solid fa-check"></i>
-                    <%= link_to "#{event.name}", event %>
+                    <%= link_to event_path(event), aria: { label: event.name } do %>
+                      <% if date.today? %>
+                        <i class="fa-solid fa-check" style="color: #fafafa;"></i>
+                      <% else %>
+                        <i class="fa-solid fa-check"></i>
+                      <% end %>
+                    <% end %>
                   </div>
                 <% end %>
               <% end %>

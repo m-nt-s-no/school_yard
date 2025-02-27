@@ -1,7 +1,12 @@
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
+    <%= render @message %>
 
-<%= render @message %>
-
-<div>
-  <%= link_to "Back to my messages", my_messages_path(current_user.name) %>
-  <%= button_to "Destroy this message", @message, method: :delete %>
+    <div>
+      <div class="d-flex align-items-center justify-content-between">
+        <%= link_to "Back to my messages", my_messages_path(current_user.name) %>
+        <%= button_to "Destroy this message", @message, method: :delete, class: 'btn btn-outline-danger' %>
+      </div>
+    </div>
+  </div>
 </div>
