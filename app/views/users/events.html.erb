@@ -29,8 +29,10 @@
             </div>
           <% group.upcoming_events.each do |event| %>
             <li class="list-group-item list-group-item-action">
-              <%= link_to "#{event.name}", event %>
-              in <%= time_ago_in_words(event.starts_at) %>
+              <div class="d-flex align-items-center justify-content-between">
+                <%= link_to "#{event.name}", event %>
+                <em>in <%= time_ago_in_words(event.starts_at) %></em>
+              </div>
             </li>
           <% end %>
         <% end %>
@@ -51,8 +53,10 @@
             </div>
           <% group.past_events.each do |event| %>
             <li class="list-group-item list-group-item-action">
-              <%= link_to "#{event.name}", event %>
-              <%= time_ago_in_words(event.ends_at) %> ago
+              <div class="d-flex align-items-center justify-content-between">
+                <%= link_to "#{event.name}", event %>
+                <em><%= time_ago_in_words(event.ends_at) %> ago</em>
+              </div>
             </li>
           <% end %>
         <% end %>

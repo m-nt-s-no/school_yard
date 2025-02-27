@@ -16,16 +16,24 @@
       </li>
     </ul>
 
-    <%= month_calendar(attribute: :starts_at, end_attribute: :ends_at) do |date| %>
-      <%= date.day %>
-
-        <% @user.calendar.each do |event| %>
-          <% if event.starts_at.to_date == date %>
-            <div>
-              <%= link_to "#{event.name}", event %>
+      <%= month_calendar(attribute: :starts_at, end_attribute: :ends_at) do |date| %>
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-title">
+              <%= date.day %>
+            </h6>
+            <div class="card-text">
+              <% @user.calendar.each do |event| %>
+                <% if event.starts_at.to_date == date %>
+                  <div>
+                    <i class="fa-solid fa-check"></i>
+                    <%= link_to "#{event.name}", event %>
+                  </div>
+                <% end %>
+              <% end %>
             </div>
-          <% end %>
-        <% end %>
-    <% end %>
+          </div>
+        </div>
+      <% end %>
   </div>
 </div>
