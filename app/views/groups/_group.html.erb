@@ -15,10 +15,15 @@
   </p>
 
   <% if policy(group).show_members? %>
-    <p>
+    <ul class="list-group list-group-flush">
       <strong>Members:</strong>
       <% group.members.each do |member| %>
-        <p><%= member.name %></p>
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <%= image_tag member.image, class: 'rounded-circle mr-2', width: 40, height: 40 %>
+            <%= member.name %>
+          </div>
+        </li>
       <% end %>
     </p>
   <% end %>
