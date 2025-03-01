@@ -20,8 +20,10 @@
 
     <div id="users">
       <% @users.each do |user| %>
-        <%= render "users/user", user: user %>
+        <div class="mb-3">
+          <%= render "users/user", user: user %>
           <%= link_to "Show this user", user.name %>
+        </div>
       <% end %>
     </div>
   </div>

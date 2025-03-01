@@ -1,25 +1,26 @@
 <div class="row mb-4">
   <div class="col-md-6 offset-md-3">
-
-    <ul class="nav nav-pills nav-justified">
-      <li class="nav-item">
-        <%= link_to "My events", my_events_path(@user.name), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "My groups", my_groups_path(@user.name), class: "nav-link active" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "My messages", my_messages_path(@user.name), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "My calendar", my_calendar_path(@user.name), class: "nav-link" %>
-      </li>
-    </ul>
+    <div class="mb-2">
+      <ul class="nav nav-pills nav-justified">
+        <li class="nav-item">
+          <%= link_to "My events", my_events_path(@user.name), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "My messages", my_messages_path(@user.name), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "My calendar", my_calendar_path(@user.name), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "My groups", my_groups_path(@user.name), class: "nav-link active" %>
+        </li>
+      </ul>
+    </div>
 
     <%= render "users/groups", user: @user %>
 
     <% if policy(@user).show_create_link? %>
-      <div class="card-body">
+      <div class="btn btn-outline-secondary btn-block">
             <%= link_to "Create a new group", new_group_path(Group.new) %>
       </div>
     <% end %>

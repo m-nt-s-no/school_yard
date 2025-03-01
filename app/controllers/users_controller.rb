@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def index
     if @user.role == "teacher"
       @users = User.all
-    else
+    elsif @user.role == "guardian"
       @users = User.where(:role => "teacher") #parents cannot see other parents in directory
     end
     authorize @user
