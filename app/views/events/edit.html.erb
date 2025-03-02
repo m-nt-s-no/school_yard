@@ -8,7 +8,7 @@
 
     <div>
       <%= link_to "Show this event", @event %> |
-      <%= link_to "Back to my events", my_events_path(current_user.name) %>
+      <%= link_to "Back to my events", my_events_path(current_user.slug) %>
     </div>
   </div>
 </div>

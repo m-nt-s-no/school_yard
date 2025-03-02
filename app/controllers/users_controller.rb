@@ -36,8 +36,8 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    if params[:name]
-      @user = User.find_by!(name: params.fetch(:name))
+    if params[:slug]
+      @user = User.find_by!(slug: params[:slug])
     else
       @user = current_user
     end

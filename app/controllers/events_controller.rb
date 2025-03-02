@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
-  #before_action :ensure_only_teachers_handle_events
 
   # GET /events or /events.json
   def index
@@ -70,13 +69,6 @@ class EventsController < ApplicationController
     def set_event
       @event = Event.find(params[:id])
     end
-
-    # Only teachers can create-update-destroy events.
-    #def ensure_only_teachers_handle_events
-      #unless current_user.role == "teacher"
-        #redirect_to event_url(@event), alert: "You're not authorized for that."
-      #end
-    #end
 
     # Only allow a list of trusted parameters through.
     def event_params
