@@ -59,7 +59,7 @@ class EventsController < ApplicationController
     @event.destroy!
 
     respond_to do |format|
-      format.html { redirect_to my_events_path(current_user.name), notice: "Event was successfully destroyed." }
+      format.html { redirect_to my_events_path(current_user.slug), notice: "Event was successfully destroyed." }
       format.json { head :no_content }
     end
   end
