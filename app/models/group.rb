@@ -30,6 +30,7 @@ class Group < ApplicationRecord
   has_many :members, through: :enrollments, source: :user
   has_many :teacher_members, -> { where(role: "teacher") }, through: :enrollments, source: :user
   has_many :guardian_members, -> { where(role: "guardian") }, through: :enrollments, source: :user
+  accepts_nested_attributes_for :enrollments, allow_destroy: true, reject_if: :all_blank
   after_create :create_leader_enrollment
 
   def leader_must_be_teacher

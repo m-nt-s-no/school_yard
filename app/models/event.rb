@@ -28,4 +28,5 @@ class Event < ApplicationRecord
   validates :name, presence: true
   validates :starts_at, presence: true
   validates :ends_at, presence: true
+  validates :ends_at, comparison: { greater_than: :starts_at, message: "end time must come after start time" }
 end

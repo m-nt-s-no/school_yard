@@ -1,15 +1,17 @@
 
-<%= simple_form_for(@message) do |f| %>
+<%= simple_form_for(message) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <%= f.association :sender %>
-    <%= f.association :recipient %>
-    <%= f.input :content %>
+  <div class="mb-3">
+    <div class="form-inputs">
+      <%= f.hidden_field :sender_id %>
+      <%= f.association :recipient, collection: @allowed_recipients, class: "form-control" %>
+      <%= f.text_area :content, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+  <button type="submit" class="btn btn-outline-secondary btn-block">
+    <%= f.button :submit, "Send message" %>
+  </button>
 <% end %>

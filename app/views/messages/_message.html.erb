@@ -1,12 +1,17 @@
 <div id="<%= dom_id message %>">
   <p>
     <strong>Sender:</strong>
-    <%= message.sender_id %>
+    <%= message.sender.name %>
   </p>
 
   <p>
     <strong>Recipient:</strong>
-    <%= message.recipient_id %>
+    <%= message.recipient.name %>
+  </p>
+
+    <p>
+    <strong>Sent at:</strong>
+    <%= message.created_at.strftime("%b %-d, %Y at %l:%M %P") %>
   </p>
 
   <p>
