@@ -1,15 +1,117 @@
+<div class="container">
+  <%= simple_form_for(@group) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <% if @group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
+      <ul>
+        <% @group.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
 
-<%= simple_form_for(@group) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <div class="form-inputs">
+      <div class="row mt-3">
+        <%= f.input :name, input_html: { class: 'form-control' } %>
+        <%= f.hidden_field :leader %>
+        <%= f.hidden_field :enrollments_count %>
+      </div>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.association :leader %>
-    <%= f.input :enrollments_count %>
-  </div>
+      <div class="row mt-3">
+      <% if @group.members.any? %>
+        <div id="current_members">
+          <h5>Current Members</h5>
+          <ul class="list-group list-group-flush">
+            <% @group.enrollments.each do |enrollment| %>
+              <% next if enrollment.user == @group.leader %>
+              <% if enrollment.persisted? %>
+                <li class="list-group-item">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <%= image_tag enrollment.user.image, class: 'rounded-circle mr-2', width: 40, height: 40 %>
+                    <%= enrollment.user.name %>
+                    <div class="btn btn-outline-danger">
+                      <%= link_to "Disenroll this member", group_enrollment_path(@group, enrollment), method: :delete, data: { confirm: "Are you sure you want to remove this member?" } %>
+                    </div>
+                  </div>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+      <div class="row mt-3">
+        <div id="new_enrollments">
+          <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Enroll New Members</a>
+          <div class="collapse multi-collapse" id="multiCollapseExample1">
+            <div class="card card-body">
+              <%= f.fields_for :enrollments do |enrollment_form| %>
+                <% if enrollment_form.object.new_record? %>
+                  <div class="enrollment-fields">
+                    <div class="row mt-3">
+                      <%= enrollment_form.association :user, collection: User.where.not(id: @group.members.map(&:id) + [current_user.id]), prompt: "Select a user", input_html: { class: 'form-control' } %>
+                    </div>
+                    <div class="btn btn-outline-danger">
+                      <%= link_to 'Remove', '#', class: 'remove-enrollment' %>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+              <div class="row mt-3">
+                <div id="add-enrollment" class="btn btn-outline-primary">
+                  <%= link_to 'Add Member', '#', id: 'add-enrollment' %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="btn btn-outline-secondary btn-block">
+        <div class="form-actions">
+          <%= f.button :submit %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= content_for :javascript do %>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    let enrollmentsContainer = document.getElementById('new_enrollments');
+    let addEnrollmentLink = document.getElementById('add-enrollment');
+
+    addEnrollmentLink.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      // Clone the first enrollment field set
+      let newFields = enrollmentsContainer.querySelector('.enrollment-fields').cloneNode(true);
+
+      // Reset the select index and clear any inputs
+      newFields.querySelector('select').selectedIndex = 0;
+      newFields.querySelectorAll('input, select').forEach((input) => {
+        if (input.type !== 'hidden') { // Avoid clearing hidden fields used by Rails
+          input.value = '';
+        }
+      });
+
+      // Append the new fields to the container
+      enrollmentsContainer.appendChild(newFields);
+    });
+
+    enrollmentsContainer.addEventListener('click', function(e) {
+      if (e.target.classList.contains('remove-enrollment')) {
+        e.preventDefault();
+        e.target.closest('.enrollment-fields').remove();
+      }
+    });
+  });
+</script>
 <% end %>

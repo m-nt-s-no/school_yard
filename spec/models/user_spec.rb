@@ -14,6 +14,7 @@
 #  reset_password_token    :string
 #  role                    :string
 #  sent_messages_count     :integer          default(0)
+#  slug                    :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #
@@ -22,6 +23,7 @@
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_name                  (name)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_slug                  (slug) UNIQUE
 #
 require 'rails_helper'
 
@@ -82,12 +84,15 @@ RSpec.describe User, type: :model do
     expect(user2.membership_groups.first).to eq(test_group)
   end
 
-  it 'has a schedule indirect association with Events model' do
+  it 'has a calendar indirect association with Events model' do
     user = User.create!(name: 'John Doe', email: 'johndoe@example.com', password: 'password', role: 'teacher')
-    user2 = User.create!(name: 'Jane Doe', email: 'janedoe@example.com', password: 'password', role: 'guardian')
+    user2 = User.create!(name: 'Jane Doe', email: 'janedoe@example.com', password: 'password', role: 'teacher')
     test_group = Group.create!(name: 'John\'s group', leader_id: user.id)
+    test_group2 = Group.create!(name: 'Jane\'s group', leader_id: user2.id)
     test_enrollment = Enrollment.create!(group_id: test_group.id, user_id: user2.id)
     test_event = Event.create!(name: 'BBQ at John\'s house', starts_at: DateTime.now(), ends_at: 2.hours.from_now, group_id: test_group.id)
-    expect(user2.schedule.first).to eq(test_event)
+    test_event2 = Event.create!(name: 'yoga class', starts_at: 3.hours.from_now, ends_at: 4.hours.from_now, group_id: test_group2.id)
+    expect(user2.calendar.first).to eq(test_event)
+    expect(user2.calendar.last).to eq(test_event2)
   end
 end
