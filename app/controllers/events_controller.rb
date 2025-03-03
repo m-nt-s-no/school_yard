@@ -4,24 +4,29 @@ class EventsController < ApplicationController
   # GET /events or /events.json
   def index
     @events = Event.all
+    authorize @event
   end
 
   # GET /events/1 or /events/1.json
   def show
+    authorize @event
   end
 
   # GET /events/new
   def new
     @event = Event.new
+    authorize @event
   end
 
   # GET /events/1/edit
   def edit
+    authorize @event
   end
 
   # POST /events or /events.json
   def create
     @event = Event.new(event_params)
+    authorize @event
 
     respond_to do |format|
       if @event.save
@@ -36,6 +41,7 @@ class EventsController < ApplicationController
 
   # PATCH/PUT /events/1 or /events/1.json
   def update
+    authorize @event
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to event_url(@event), notice: "Event was successfully updated." }
@@ -49,10 +55,11 @@ class EventsController < ApplicationController
 
   # DELETE /events/1 or /events/1.json
   def destroy
+    authorize @event
     @event.destroy!
 
     respond_to do |format|
-      format.html { redirect_to events_url, notice: "Event was successfully destroyed." }
+      format.html { redirect_to my_events_path(current_user.slug), notice: "Event was successfully destroyed." }
       format.json { head :no_content }
     end
   end

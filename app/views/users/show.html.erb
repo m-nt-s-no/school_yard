@@ -1,28 +1,25 @@
 <div class="row mb-4">
   <div class="col-md-6 offset-md-3">
-    <%= render @user %>
-    <div class="card">
-      <div class="card-header">
-        <%= @user.name %> leads these groups:
-      </div>
-      <ul class="list-group list-group-flush">
-      <% @user.groups_they_lead.each do |group| %>
-        <li class="list-group-item"><%= group.name %></li>
-      <% end %>
-      </ul>
+    <ul class="nav nav-pills nav-justified">
+      <li class="nav-item">
+        <%= link_to "My events", my_events_path(@user.slug), class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "My messages", my_messages_path(@user.slug), class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "My calendar", my_calendar_path(@user.slug), class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "My groups", my_groups_path(@user.slug), class: "nav-link" %>
+      </li>
+    </ul>
+    <div>
+      <%= render @user %>
+      <%= render "users/groups", user: @user %>
     </div>
-    <div class="card">
-      <div class="card-header">
-        <%= @user.name %> is also a member of these groups:
-      </div>
-      <ul class="list-group list-group-flush">
-      <% @user.membership_groups.each do |group| %>
-        <li class="list-group-item"><%= group.name %></li>
-      <% end %>
-      </ul>
-    </div>
-    <div class="card-body">
-          <%= render "messages/form", message: Message.new(recipient_id: @user.id) %>
-    </div>
-  </div>
+    <div>
+      <%= link_to "Back to directory", directory_path(@user.slug), class: "nav-link" %>
+    </div
+  </div
 </div>

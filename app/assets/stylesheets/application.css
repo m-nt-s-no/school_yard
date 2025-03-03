@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+ .simple-calendar .calendar-heading {
+  justify-content: center;
+ }
+ .simple-calendar .calendar-title {
+  font-weight: bold;
+  display: block;
+  text-align: center;
+}
+
+.simple-calendar nav {
+  display: block;
+  text-align: center;
+}
