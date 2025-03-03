@@ -2,7 +2,9 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between">
-          <%= image_tag user.image, class: 'rounded-circle mr-2', width: 80, height: 80 %>
+          <% if user.image %>
+            <%= image_tag user.image, class: 'rounded-circle mr-2', width: 80, height: 80 %>
+          <% end %>
           <div class="card-text">
             <div class="d-flex justify-content-end">
               <h3 class="display-6">
