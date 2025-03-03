@@ -1,54 +1,68 @@
 <div class="row mb-4">
   <div class="col-md-6 offset-md-3">
+    <div class="mb-2">
+      <ul class="nav nav-pills nav-justified">
+        <li class="nav-item">
+          <%= link_to "My events", my_events_path(@user.slug), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "My messages", my_messages_path(@user.slug), class: "nav-link active" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "My calendar", my_calendar_path(@user.slug), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "My groups", my_groups_path(@user.slug), class: "nav-link" %>
+        </li>
+      </ul>
+    </div>
 
-    <ul class="nav nav-pills nav-justified">
-      <li class="nav-item">
-        <%= link_to "My events", my_events_path(@user.name), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "My groups", my_groups_path(@user.name), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "My messages", my_messages_path(@user.name), class: "nav-link active" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "My calendar", my_calendar_path(@user.name), class: "nav-link" %>
-      </li>
-    </ul>
-
-    <div class="card">
-      <div class="card-header">
-        Your received messages:
+    <div class="mb-2">
+      <div class="card">
+        <div class="card-header">
+          <h6>Your received messages:</h6>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+          <% @received_msgs.each do |msg| %>
+              <li class="list-group-item list-group-item-action">
+                <div class="d-flex align-items-center justify-content-between">
+                  <% if msg.sender.image %>
+                    <%= image_tag msg.sender.image, class: 'rounded-circle mr-2', width: 40, height: 40 %>
+                  <% end %>
+                  <%= link_to "#{msg.sender.name}", msg %>
+                  <em><%= time_ago_in_words(msg.created_at) %> ago</em>
+                </div>
+              </li>
+          <% end %>
+          </ul>
+        </div>
       </div>
-      <div class="card-body">
-        <ul class="list-group list-group-flush">
-        <% @received_msgs.each do |msg| %>
-            <li class="list-group-item list-group-item-action">
-              <%= link_to "#{msg.sender.name}", msg %>
-              <%= time_ago_in_words(msg.created_at) %> ago
-            </li>
-        <% end %>
-        </ul>
+    </div>
+    <div class="mb-2">
+      <div class="card">
+        <div class="card-header">
+          <h6>Your sent messages:</h6>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+          <% @sent_msgs.each do |msg| %>
+              <li class="list-group-item list-group-item-action">
+                <div class="d-flex align-items-center justify-content-between">
+                  <% if msg.recipient.image %>
+                    <%= image_tag msg.recipient.image, class: 'rounded-circle mr-2', width: 40, height: 40 %>
+                  <% end %>
+                  <%= link_to "#{msg.recipient.name}", msg %>
+                  <em><%= time_ago_in_words(msg.created_at) %> ago</em>
+                </div>
+              </li>
+          <% end %>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-header">
-        Your sent messages:
-      </div>
-      <div class="card-body">
-        <ul class="list-group list-group-flush">
-        <% @sent_msgs.each do |msg| %>
-            <li class="list-group-item list-group-item-action">
-              <%= link_to "#{msg.recipient.name}", msg %>
-              <%= time_ago_in_words(msg.created_at) %> ago
-            </li>
-        <% end %>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card-body">
+    <div class="btn btn-outline-secondary btn-block">
       <%= link_to "Create a new message", new_message_path(Message.new) %>
     </div>
   </div>

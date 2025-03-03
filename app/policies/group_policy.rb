@@ -15,6 +15,10 @@ class GroupPolicy < ApplicationPolicy
     @user.role == "teacher"
   end
 
+  def show_members?
+    @user.role == "teacher" || @group.members.include?(@user)
+  end
+
   #only a group's leader can edit/update/destroy the group
   def edit?
     @user == @group.leader
