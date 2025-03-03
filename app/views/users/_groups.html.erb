@@ -1,23 +1,27 @@
     <% if @user.role == "teacher" %>
+      <div class="mb-2">
+        <div class="card">
+          <div class="card-header">
+            <h6>You lead these groups:</h6>
+          </div>
+          <ul class="list-group list-group-flush">
+          <% @user.groups_they_lead.each do |group| %>
+            <li class="list-group-item"><%= link_to "#{group.name}", group %></li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+    <div class="mb-2">
       <div class="card">
         <div class="card-header">
-          <%= @user.name %> leads these groups:
+          <h6>You are a member of these groups:</h6>
         </div>
         <ul class="list-group list-group-flush">
-        <% @user.groups_they_lead.each do |group| %>
+        <% @user.membership_groups.each do |group| %>
+          <% next if @user.groups_they_lead.include?(group) %>
           <li class="list-group-item"><%= link_to "#{group.name}", group %></li>
         <% end %>
         </ul>
       </div>
-    <% end %>
-    <div class="card">
-      <div class="card-header">
-        <%= @user.name %> is a member of these groups:
-      </div>
-      <ul class="list-group list-group-flush">
-      <% @user.membership_groups.each do |group| %>
-        <% next if @user.groups_they_lead.include?(group) %>
-        <li class="list-group-item"><%= link_to "#{group.name}", group %></li>
-      <% end %>
-      </ul>
     </div>

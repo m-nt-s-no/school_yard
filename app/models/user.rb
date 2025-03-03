@@ -14,6 +14,7 @@
 #  reset_password_token    :string
 #  role                    :string
 #  sent_messages_count     :integer          default(0)
+#  slug                    :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #
@@ -22,6 +23,7 @@
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_name                  (name)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_slug                  (slug) UNIQUE
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -38,4 +40,18 @@ class User < ApplicationRecord
   has_many :enrollments, class_name: "Enrollment", foreign_key: "user_id", dependent: :destroy
   has_many :membership_groups, through: :enrollments, source: :group
   has_many :calendar, through: :membership_groups, source: :events
+
+  before_save :generate_unique_slug
+  def generate_unique_slug
+    base_slug = name.parameterize
+    unique_slug = base_slug
+    count = 2
+
+    while User.exists?(slug: unique_slug)
+      unique_slug = "#{base_slug}-#{count}"
+      count += 1
+    end
+
+    self.slug = unique_slug
+  end
 end
