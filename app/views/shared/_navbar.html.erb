@@ -6,17 +6,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Resources
-          </a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="/groups">Groups</a>
-            <a class="dropdown-item" href="/enrollments">Enrollments</a>
-            <a class="dropdown-item" href="/events">Events</a>
-            <a class="dropdown-item" href="/messages">Messages</a>
-          </div>
-        </li>
+        <%= link_to "Directory", directory_path, class: "nav-link" %>
       </ul>
       <ul class="navbar-nav">
         <% if user_signed_in? %>

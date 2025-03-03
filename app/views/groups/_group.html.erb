@@ -6,12 +6,27 @@
 
   <p>
     <strong>Leader:</strong>
-    <%= group.leader_id %>
+    <%= group.leader.name %>
   </p>
 
   <p>
-    <strong>Enrollments count:</strong>
+    <strong>Number of members:</strong>
     <%= group.enrollments_count %>
   </p>
 
+  <% if policy(group).show_members? %>
+    <ul class="list-group list-group-flush">
+      <strong>Members:</strong>
+      <% group.members.each do |member| %>
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <% if member.image %>
+              <%= image_tag member.image, class: 'rounded-circle mr-2', width: 40, height: 40 %>
+            <% end %>
+            <%= member.name %>
+          </div>
+        </li>
+      <% end %>
+    </p>
+  <% end %>
 </div>
