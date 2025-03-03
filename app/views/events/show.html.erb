@@ -12,8 +12,8 @@
         </div>
       <% end %>
       <div class="mt-3">
-        <%= link_to "My events", my_events_path(current_user.name) %> |
-      <%= link_to "My calendar", my_calendar_path(current_user.name) %>
+        <%= link_to "My events", my_events_path(current_user.slug) %> |
+      <%= link_to "My calendar", my_calendar_path(current_user.slug) %>
       </div>
 
     </div>

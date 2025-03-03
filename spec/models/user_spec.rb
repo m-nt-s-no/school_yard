@@ -14,6 +14,7 @@
 #  reset_password_token    :string
 #  role                    :string
 #  sent_messages_count     :integer          default(0)
+#  slug                    :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #
@@ -22,6 +23,7 @@
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_name                  (name)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_slug                  (slug) UNIQUE
 #
 require 'rails_helper'
 

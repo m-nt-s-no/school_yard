@@ -3,16 +3,16 @@
     <div class="mb-2">
       <ul class="nav nav-pills nav-justified">
         <li class="nav-item">
-          <%= link_to "My events", my_events_path(@user.name), class: "nav-link" %>
+          <%= link_to "My events", my_events_path(@user.slug), class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "My messages", my_messages_path(@user.name), class: "nav-link active" %>
+          <%= link_to "My messages", my_messages_path(@user.slug), class: "nav-link active" %>
         </li>
         <li class="nav-item">
-          <%= link_to "My calendar", my_calendar_path(@user.name), class: "nav-link" %>
+          <%= link_to "My calendar", my_calendar_path(@user.slug), class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "My groups", my_groups_path(@user.name), class: "nav-link" %>
+          <%= link_to "My groups", my_groups_path(@user.slug), class: "nav-link" %>
         </li>
       </ul>
     </div>
@@ -27,7 +27,9 @@
           <% @received_msgs.each do |msg| %>
               <li class="list-group-item list-group-item-action">
                 <div class="d-flex align-items-center justify-content-between">
-                  <%= image_tag msg.sender.image, class: 'rounded-circle mr-2', width: 40, height: 40 %>
+                  <% if msg.sender.image %>
+                    <%= image_tag msg.sender.image, class: 'rounded-circle mr-2', width: 40, height: 40 %>
+                  <% end %>
                   <%= link_to "#{msg.sender.name}", msg %>
                   <em><%= time_ago_in_words(msg.created_at) %> ago</em>
                 </div>
@@ -47,7 +49,9 @@
           <% @sent_msgs.each do |msg| %>
               <li class="list-group-item list-group-item-action">
                 <div class="d-flex align-items-center justify-content-between">
-                  <%= image_tag msg.recipient.image, class: 'rounded-circle mr-2', width: 40, height: 40 %>
+                  <% if msg.recipient.image %>
+                    <%= image_tag msg.recipient.image, class: 'rounded-circle mr-2', width: 40, height: 40 %>
+                  <% end %>
                   <%= link_to "#{msg.recipient.name}", msg %>
                   <em><%= time_ago_in_words(msg.created_at) %> ago</em>
                 </div>
