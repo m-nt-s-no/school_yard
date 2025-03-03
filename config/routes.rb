@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
-  resources :events
-  resources :messages
-  resources :enrollments
-  resources :groups
+  root "users#events"
+
   devise_for :users
-  root "events#index"
-  
+
+  resources :groups, except: [:index] do
+    resources :enrollments, only: [:create, :destroy]
+  end
+  resources :events, except: [:index]
+  resources :messages, only: [:show, :new, :create]
+
+  get "/directory" => "users#index", as: :directory
+  get ":slug/events" => "users#events", as: :my_events
+  get ":slug/groups" => "users#groups", as: :my_groups
+  get ":slug/messages" => "users#messages", as: :my_messages
+  get ":slug/calendar" => "users#calendar", as: :my_calendar
+  get ":slug" => "users#show", as: :user
 end

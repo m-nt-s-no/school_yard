@@ -6,15 +6,20 @@
 
   <p>
     <strong>Group:</strong>
-    <%= event.group_id %>
+    <%= event.group.name %>
   </p>
 
   <p>
     <strong>Starts at:</strong>
-    <%= event.starts_at %>
+    <%= event.starts_at.strftime("%b %-d %l:%M %P") %>
   </p>
 
   <p>
+    <strong>Ends at:</strong>
+    <%= event.ends_at.strftime("%b %-d %l:%M %P") %>
+  </p>
+
+    <p>
     <strong>Address:</strong>
     <%= event.address %>
   </p>
@@ -22,11 +27,6 @@
   <p>
     <strong>Notes:</strong>
     <%= event.notes %>
-  </p>
-
-  <p>
-    <strong>Ends at:</strong>
-    <%= event.ends_at %>
   </p>
 
 </div>

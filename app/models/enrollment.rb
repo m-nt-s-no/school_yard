@@ -14,6 +14,6 @@
 #
 class Enrollment < ApplicationRecord
   belongs_to :user, counter_cache: true
-  belongs_to :group, counter_cache: true
+  belongs_to :group, optional: true, counter_cache: true
   validates :user_id, uniqueness: { scope: :group_id, message: "User is already enrolled" }
 end
