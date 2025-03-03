@@ -1,6 +1,25 @@
 <div class="row mb-4">
   <div class="col-md-6 offset-md-3">
-    <%= render @user %>
-    <%= render "users/groups", user: @user %>
-  </div>
+    <ul class="nav nav-pills nav-justified">
+      <li class="nav-item">
+        <%= link_to "My events", my_events_path(@user.slug), class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "My messages", my_messages_path(@user.slug), class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "My calendar", my_calendar_path(@user.slug), class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "My groups", my_groups_path(@user.slug), class: "nav-link" %>
+      </li>
+    </ul>
+    <div>
+      <%= render @user %>
+      <%= render "users/groups", user: @user %>
+    </div>
+    <div>
+      <%= link_to "Back to directory", directory_path(@user.slug), class: "nav-link" %>
+    </div
+  </div
 </div>
