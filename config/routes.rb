@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   resources :events, except: [:index]
   resources :messages, only: [:show, :new, :create]
 
+  get("/rake_tasks", { :controller => "rake_tasks", :action => "show" })
+  get("/run_task", { :controller => "rake_tasks", :action => "run_task" })
+
   get "/directory" => "users#index", as: :directory
   get ":slug/events" => "users#events", as: :my_events
   get ":slug/groups" => "users#groups", as: :my_groups
