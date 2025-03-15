@@ -19,7 +19,7 @@
     <%= event.ends_at.strftime("%b %-d %l:%M %P") %>
   </p>
 
-    <p>
+  <p>
     <strong>Address:</strong>
     <%= event.address %>
   </p>
@@ -28,5 +28,11 @@
     <strong>Notes:</strong>
     <%= event.notes %>
   </p>
+
+  <% if current_user.detect_event_conflicts.include?(event) %>
+    <p>
+      This event conflicts with another one on your calendar.
+    </p>
+  <% end %>
 
 </div>
