@@ -41,19 +41,6 @@ class User < ApplicationRecord
   has_many :membership_groups, through: :enrollments, source: :group
   has_many :calendar, through: :membership_groups, source: :events
 
-  def detect_event_conflicts
-    conflicts = []
-    calendar.each do |event1|
-      calendar.each do |event2|
-        next if event1 == event2
-        if (event1.ends_at > event2.starts_at) && (event1.starts_at < event2.ends_at)
-          conflicts.push(event1)
-        end
-      end
-    end
-    conflicts
-  end
-
   before_save :generate_unique_slug
   def generate_unique_slug
     base_slug = name.parameterize

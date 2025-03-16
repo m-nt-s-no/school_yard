@@ -29,10 +29,4 @@
     <%= event.notes %>
   </p>
 
-  <% if current_user.detect_event_conflicts.include?(event) %>
-    <p>
-      This event conflicts with another one on your calendar.
-    </p>
-  <% end %>
-
 </div>

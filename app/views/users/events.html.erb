@@ -32,7 +32,14 @@
             <% group.upcoming_events.each do |event| %>
               <li class="list-group-item list-group-item-action">
                 <div class="d-flex align-items-center justify-content-between">
-                  <%= link_to "#{event.name}", event %>
+                  <div class="d-flex align-items-center justify-content-between">
+                    <%= link_to "#{event.name}", event %>
+                    <% if @conflicts.include?(event) %>
+                      <div style="margin-left:10px">
+                        <strong> time conflict</strong>
+                      </div>
+                    <% end %>
+                  </div>
                   <em>in <%= time_ago_in_words(event.starts_at) %></em>
                 </div>
               </li>
