@@ -64,6 +64,19 @@ class EventsController < ApplicationController
     end
   end
 
+  def check_conflicts
+    proposed_event = Event.new(starts_at: params[:starts_at], ends_at: params[:ends_at])
+    group = Group.find(params[:group_id])
+    group_members = group.members
+
+    conflict_detector = PossibleEventConflictDetector.new(proposed_event, group_members)
+    conflicting_member_count = conflict_detector.detect_member_conflicts
+
+    respond_to do |format|
+      format.json { render json: { conflict_count: conflicting_member_count } }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event

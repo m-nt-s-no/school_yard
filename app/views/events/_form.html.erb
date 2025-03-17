@@ -5,11 +5,11 @@
 
     <div class="form-inputs">
       <%= f.input :name, input_html: { class: 'form-control' } %>
-      <%= f.association :group, collection: current_user.groups_they_lead, input_html: { class: 'form-control' } %>
-      <%= f.input :starts_at, input_html: { class: 'form-control' } %>
+      <%= f.association :group, collection: current_user.groups_they_lead, input_html: { class: 'form-control' }, id: 'event_group_id' %>
+      <%= f.input :starts_at, input_html: { class: 'form-control' }, id: 'event_starts_at' %>
       <%= f.input :address, input_html: { class: 'form-control' } %>
       <%= f.input :notes, input_html: { class: 'form-control' } %>
-      <%= f.input :ends_at, input_html: { class: 'form-control' } %>
+      <%= f.input :ends_at, input_html: { class: 'form-control' }, id: 'event_ends_at' %>
     </div>
 
     <div class="row mt-3">
@@ -21,3 +21,61 @@
     </div>
   <% end %>
 </div>
+
+<%= content_for :javascript do %>
+<script>
+document.addEventListener('turbo:load', function() {
+  const groupField = document.getElementById('event_group_id');
+  const startYearField = document.getElementById('event_starts_at_1i');
+  const startMonthField = document.getElementById('event_starts_at_2i');
+  const startDayField = document.getElementById('event_starts_at_3i');
+  const startHourField = document.getElementById('event_starts_at_4i');
+  const startMinuteField = document.getElementById('event_starts_at_5i');
+  const endYearField = document.getElementById('event_ends_at_1i');
+  const endMonthField = document.getElementById('event_ends_at_2i');
+  const endDayField = document.getElementById('event_ends_at_3i');
+  const endHourField = document.getElementById('event_ends_at_4i');
+  const endMinuteField = document.getElementById('event_ends_at_5i');
+
+  function getDatetime(yearField, monthField, dayField, hourField, minuteField) {
+    return new Date(
+      yearField.value,
+      monthField.value - 1, // Months are 0-based in JavaScript Date
+      dayField.value,
+      hourField.value,
+      minuteField.value
+    );
+  }
+
+  function checkConflicts() {
+    const groupId = groupField.value;
+    const startTime = getDatetime(startYearField, startMonthField, startDayField, startHourField, startMinuteField);
+    const endTime = getDatetime(endYearField, endMonthField, endDayField, endHourField, endMinuteField);
+
+    if (groupId && !isNaN(startTime) && !isNaN(endTime)) {
+      fetch(`/events/check_conflicts?group_id=${groupId}&starts_at=${startTime.toISOString()}&ends_at=${endTime.toISOString()}`, {
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest' // Indicate this is an AJAX request
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.conflict_count > 0) {
+          alert(`${data.conflict_count} group members have conflicts with this time frame.`);
+        } else {
+          alert('No time conflicts detected among any group members.');
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    }
+  }
+
+  const startFields = [startYearField, startMonthField, startDayField, startHourField, startMinuteField];
+  const endFields = [endYearField, endMonthField, endDayField, endHourField, endMinuteField];
+
+  startFields.forEach(field => field.addEventListener('change', checkConflicts));
+  endFields.forEach(field => field.addEventListener('change', checkConflicts));
+  groupField.addEventListener('change', checkConflicts);
+});
+</script>
+<% end %>
