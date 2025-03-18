@@ -5,11 +5,18 @@ class PossibleEventConflictDetector
   end
 
   def detect_member_conflicts
+    puts "detect_member_conflicts"
+    puts @proposed_event.starts_at.class
+    puts @proposed_event.ends_at.class
     conflicts = 0
 
     @group_members.each do |member|
+      puts "Checking member: #{member.name}"
       member.calendar.each do |event|
-        #not all event conflicts being detected, check logic below
+        # Skip the event if it's the same as the proposed event being edited
+        if @proposed_event.id && @proposed_event.id == event.id
+          next
+        end
         if (@proposed_event.ends_at > event.starts_at) && (@proposed_event.starts_at < event.ends_at)
           conflicts += 1
           break

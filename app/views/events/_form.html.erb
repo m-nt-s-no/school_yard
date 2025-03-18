@@ -1,5 +1,5 @@
 <div class="container">
-  <%= simple_form_for(@event) do |f| %>
+  <%= simple_form_for(@event, html: { data: { event_id: @event.id.presence } }) do |f| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
@@ -25,6 +25,14 @@
 <%= content_for :javascript do %>
 <script>
 document.addEventListener('turbo:load', function() {
+  const form = document.querySelector('form[data-event-id]');
+  if (!form) {
+    console.error('Form not found or data-event-id not set');
+    return;
+  }
+  const eventId = form.dataset.eventId; 
+  //const form = document.querySelector('form[data-event-id]');
+  //const eventId = form ? form.dataset.eventId : null; // Safely access the event ID
   const groupField = document.getElementById('event_group_id');
   const startYearField = document.getElementById('event_starts_at_1i');
   const startMonthField = document.getElementById('event_starts_at_2i');
@@ -40,7 +48,7 @@ document.addEventListener('turbo:load', function() {
   function getDatetime(yearField, monthField, dayField, hourField, minuteField) {
     return new Date(
       yearField.value,
-      monthField.value - 1, // Months are 0-based in JavaScript Date
+      monthField.value - 1,
       dayField.value,
       hourField.value,
       minuteField.value
@@ -52,10 +60,18 @@ document.addEventListener('turbo:load', function() {
     const startTime = getDatetime(startYearField, startMonthField, startDayField, startHourField, startMinuteField);
     const endTime = getDatetime(endYearField, endMonthField, endDayField, endHourField, endMinuteField);
 
+    console.log(form);
+    console.log(eventId);
+
     if (groupId && !isNaN(startTime) && !isNaN(endTime)) {
-      fetch(`/events/check_conflicts?group_id=${groupId}&starts_at=${startTime.toISOString()}&ends_at=${endTime.toISOString()}`, {
+      let url = `/events/check_conflicts?group_id=${groupId}&starts_at=${startTime.toISOString()}&ends_at=${endTime.toISOString()}`;
+      if (eventId) {
+        url += `&event_id=${eventId}`;
+      }
+
+      fetch(url, {
         headers: {
-          'X-Requested-With': 'XMLHttpRequest' // Indicate this is an AJAX request
+          'X-Requested-With': 'XMLHttpRequest'
         }
       })
       .then(response => response.json())

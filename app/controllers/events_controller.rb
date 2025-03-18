@@ -65,7 +65,13 @@ class EventsController < ApplicationController
   end
 
   def check_conflicts
-    proposed_event = Event.new(starts_at: params[:starts_at], ends_at: params[:ends_at])
+    if params[:event_id].present?
+      proposed_event = Event.find(params[:event_id])
+      proposed_event.assign_attributes(starts_at: params[:starts_at], ends_at: params[:ends_at])
+    else
+      proposed_event = Event.new(starts_at: params[:starts_at], ends_at: params[:ends_at])
+    end
+
     group = Group.find(params[:group_id])
     group_members = group.members
 
