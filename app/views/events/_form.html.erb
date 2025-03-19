@@ -25,14 +25,12 @@
 <%= content_for :javascript do %>
 <script>
 document.addEventListener('turbo:load', function() {
-  const form = document.querySelector('form[data-event-id]');
+  const form = document.querySelector('form[data-event-id]') || document.querySelector('form');
   if (!form) {
-    console.error('Form not found or data-event-id not set');
+    console.error('Form not found');
     return;
   }
-  const eventId = form.dataset.eventId; 
-  //const form = document.querySelector('form[data-event-id]');
-  //const eventId = form ? form.dataset.eventId : null; // Safely access the event ID
+  const eventId = form.dataset.eventId || null; // eventId is null when an event is being created
   const groupField = document.getElementById('event_group_id');
   const startYearField = document.getElementById('event_starts_at_1i');
   const startMonthField = document.getElementById('event_starts_at_2i');
@@ -59,9 +57,6 @@ document.addEventListener('turbo:load', function() {
     const groupId = groupField.value;
     const startTime = getDatetime(startYearField, startMonthField, startDayField, startHourField, startMinuteField);
     const endTime = getDatetime(endYearField, endMonthField, endDayField, endHourField, endMinuteField);
-
-    console.log(form);
-    console.log(eventId);
 
     if (groupId && !isNaN(startTime) && !isNaN(endTime)) {
       let url = `/events/check_conflicts?group_id=${groupId}&starts_at=${startTime.toISOString()}&ends_at=${endTime.toISOString()}`;
