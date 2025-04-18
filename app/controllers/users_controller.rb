@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
   def events
     authorize @user
+    @conflicts = EventConflictDetector.new(@user.calendar).detect_event_conflicts
   end
 
   def groups
