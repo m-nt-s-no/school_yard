@@ -1,0 +1,27 @@
+<div class="container bg-info-subtle col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="<%= asset_url 'schoolyard.png' %>" class="d-block mx-lg-auto img-fluid" alt="cartoon children in front of school house" width="700" height="500" loading="lazy">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold lh-1 mb-3">Improving communication between educators and parents</h1>
+        <p class="lead">SchoolYard is a messaging app with built-in event notification and calendar to keep students’ parents informed about their activities. Better communication leads to greater parent engagement, which leads to better educational outcomes for their children.</p>
+        <div class="mb-4">
+          <h5>SchoolYard is great for:</h5>
+            <ul class="list-unstyled">
+              <li><i class="fa-solid fa-circle-check text-success me-2"></i>Schools</li>
+              <li><i class="fa-solid fa-circle-check text-success me-2"></i>Sports clubs at all levels</li>
+              <li><i class="fa-solid fa-circle-check text-success me-2"></i>Day care centers</li>
+            </ul>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <div class="btn btn-primary btn-lg px-4 me-md-2">
+            <%= link_to 'Sign Up', new_user_registration_path, class: 'text-white' %>
+          </div>
+          <div class="btn btn-outline-secondary btn-lg px-4">
+            <%= link_to 'Log In', new_user_session_path, class: 'text-dark' %>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

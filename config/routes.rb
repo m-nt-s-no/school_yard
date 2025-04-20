@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  root "users#events"
-
   devise_for :users
+
+  unauthenticated do
+    root "page#landing", as: :unauthenticated_root
+  end
+
+  authenticated :user do
+    root "users#events", as: :authenticated_root
+  end
 
   resources :groups, except: [:index] do
     resources :enrollments, only: [:create, :destroy]
@@ -19,4 +25,5 @@ Rails.application.routes.draw do
   get ":slug/messages" => "users#messages", as: :my_messages
   get ":slug/calendar" => "users#calendar", as: :my_calendar
   get ":slug" => "users#show", as: :user
+
 end
