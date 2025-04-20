@@ -39,7 +39,12 @@ Adding a calendar to a school’s messaging app would make that information easi
 `rails server`
 
 2. Open your browser and navigate to http://localhost:3000
-Follow the on-screen instructions to use the application
+   
+3. Click 'Sign up' for a new user account, or 'Log in' if you already have one. 
+
+### Entity Relationship Diagram
+
+![ERD Diagram] (https://raw.githubusercontent.com/m-nt-s-no/school_yard/main/erd.png)
 
 ## Contributing
 
@@ -50,9 +55,6 @@ Contributions are welcome! Please follow these guidelines:
 3. Commit your changes (`git commit -m 'Add some feature'`)
 4. Push to the branch (`git push origin feature-branch`)
 5. Open a pull request
-
-## License
-Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
