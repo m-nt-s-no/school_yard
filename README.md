@@ -11,6 +11,7 @@ Adding a calendar to a school’s messaging app would make that information easi
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
+- [Contact](#contact)
 
 ## Installation
 
@@ -55,6 +56,10 @@ Contributions are welcome! Please follow these guidelines:
 3. Commit your changes (`git commit -m 'Add some feature'`)
 4. Push to the branch (`git push origin feature-branch`)
 5. Open a pull request
+
+## License
+
+All rights reserved for now, but I don't want to discourage collaboration so this could change. 
 
 ## Contact
 
