@@ -45,7 +45,7 @@ Adding a calendar to a school’s messaging app would make that information easi
 
 ### Entity Relationship Diagram
 
-![ERD Diagram] (https://raw.githubusercontent.com/m-nt-s-no/school_yard/main/erd.png)
+[ERD Diagram] (https://raw.githubusercontent.com/m-nt-s-no/school_yard/main/erd.png)
 
 ## Contributing
 
