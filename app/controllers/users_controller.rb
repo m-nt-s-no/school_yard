@@ -3,10 +3,12 @@ class UsersController < ApplicationController
 
   def index
     if @user.role == "teacher"
-      @users = User.all
+      @q = User.ransack(params[:q])
     elsif @user.role == "guardian"
-      @users = User.where(:role => "teacher") #parents cannot see other parents in directory
+      #parents cannot see other parents in directory
+      @q = User.where(:role => "teacher").ransack(params[:q])
     end
+    @users = @q.result
     authorize @user
   end
 
