@@ -17,8 +17,17 @@
     <div>
       <%= render @user %>
       <%= render "users/groups", user: @user %>
+      <div class="mt-3">
+        <% if @user == current_user %>
+          <h6>Update Avatar</h6>
+          <%= form_with model: @user, url: user_path(@user.slug), method: :post, local: true do |form| %>
+            <%= form.file_field :avatar %>
+            <%= form.submit %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
-    <div>
+    <div class="mt-2">
       <%= link_to "Back to directory", directory_path(@user.slug), class: "nav-link" %>
     </div
   </div

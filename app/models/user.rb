@@ -40,6 +40,7 @@ class User < ApplicationRecord
   has_many :enrollments, class_name: "Enrollment", foreign_key: "user_id", dependent: :destroy
   has_many :membership_groups, through: :enrollments, source: :group
   has_many :calendar, through: :membership_groups, source: :events
+  has_one_attached :avatar
 
   before_save :generate_unique_slug
   def generate_unique_slug

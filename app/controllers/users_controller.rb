@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ index show events groups messages calendar ]
+  before_action :set_user, only: %i[ index show update events groups messages calendar ]
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def index
     if @user.role == "teacher"
@@ -12,6 +13,21 @@ class UsersController < ApplicationController
 
   def show
     authorize @user
+  end
+
+  def update
+    authorize @user
+    if @user == current_user
+      avatar_file = params.fetch("user").fetch("avatar")
+      @user.avatar.attach({
+        :io => avatar_file.tempfile,
+        :filename => avatar_file.original_filename,
+        :content_type => avatar_file.content_type
+      })
+      @user.save
+    end
+
+    redirect_to("/#{ @user.slug }")
   end
 
   def events
@@ -42,5 +58,14 @@ class UsersController < ApplicationController
     else
       @user = current_user
     end
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    # allow avatar on sign up
+    devise_parameter_sanitizer.permit(:sign_up, keys: ["avatar"])
+    # allow avatar on account update
+    devise_parameter_sanitizer.permit(:account_update, keys: ["avatar"])
   end
 end

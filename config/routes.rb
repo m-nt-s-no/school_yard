@@ -25,5 +25,6 @@ Rails.application.routes.draw do
   get ":slug/messages" => "users#messages", as: :my_messages
   get ":slug/calendar" => "users#calendar", as: :my_calendar
   get ":slug" => "users#show", as: :user
+  post("/:slug", { :controller => "users", :action => "update" })
 
 end

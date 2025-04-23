@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
-    redirect_back fallback_location: root_url
+    redirect_back fallback_location: authenticated_root_url
   end
 
   protected
