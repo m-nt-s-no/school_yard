@@ -55,4 +55,9 @@ class User < ApplicationRecord
 
     self.slug = unique_slug
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    #filtering by name only
+    ["name"]
+  end
 end
