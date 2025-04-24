@@ -14,11 +14,13 @@ class EnrollmentsController < ApplicationController
 
     respond_to do |format|
       if @enrollment.save
-        format.html { redirect_to enrollment_url(@enrollment), notice: "Enrollment was successfully created." }
+        format.html { redirect_to enrollment_url(@enrollment), 
+                      notice: "Enrollment was successfully created." }
         format.json { render :show, status: :created, location: @enrollment }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+        format.json { render json: @enrollment.errors, 
+                      status: :unprocessable_entity }
       end
     end
   end
@@ -29,7 +31,8 @@ class EnrollmentsController < ApplicationController
     @enrollment.destroy!
 
     respond_to do |format|
-      format.html { redirect_to edit_group_path(@enrollment.group), notice: 'Member was successfully disenrolled.'}
+      format.html { redirect_to edit_group_path(@enrollment.group), 
+                    notice: 'Member was successfully disenrolled.'}
       format.json { head :no_content }
     end
   end

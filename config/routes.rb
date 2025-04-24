@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   resources :groups, except: [:index] do
     resources :enrollments, only: [:create, :destroy]
   end
-  get("/events/check_conflicts", { :controller => "events", :action => "check_conflicts" })
+  get("/events/check_conflicts", { :controller => "events", 
+                                   :action => "check_conflicts" })
   resources :events, except: [:index]
   resources :messages, only: [:show, :new, :create]
 
@@ -25,5 +26,6 @@ Rails.application.routes.draw do
   get ":slug/messages" => "users#messages", as: :my_messages
   get ":slug/calendar" => "users#calendar", as: :my_calendar
   get ":slug" => "users#show", as: :user
+  post("/:slug", { :controller => "users", :action => "update" })
 
 end

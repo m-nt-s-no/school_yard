@@ -53,6 +53,9 @@ gem "bootsnap", require: false
 #simple_calendar for calendar view [https://github.com/excid3/simple_calendar]
 gem "simple_calendar"
 
+#AWS for image uploads
+gem 'aws-sdk-s3', require: false
+
 #ransack for search
 gem "ransack"
 

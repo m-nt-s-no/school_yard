@@ -30,7 +30,8 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
+        format.html { redirect_to event_url(@event), 
+                      notice: "Event was successfully created." }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -44,7 +45,8 @@ class EventsController < ApplicationController
     authorize @event
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to event_url(@event), notice: "Event was successfully updated." }
+        format.html { redirect_to event_url(@event), 
+                      notice: "Event was successfully updated." }
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -59,7 +61,8 @@ class EventsController < ApplicationController
     @event.destroy!
 
     respond_to do |format|
-      format.html { redirect_to my_events_path(current_user.slug), notice: "Event was successfully destroyed." }
+      format.html { redirect_to my_events_path(current_user.slug),
+                    notice: "Event was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -67,9 +70,11 @@ class EventsController < ApplicationController
   def check_conflicts
     if params[:event_id].present?
       proposed_event = Event.find(params[:event_id])
-      proposed_event.assign_attributes(starts_at: params[:starts_at], ends_at: params[:ends_at])
+      proposed_event.assign_attributes(starts_at: params[:starts_at], 
+                                       ends_at: params[:ends_at])
     else
-      proposed_event = Event.new(starts_at: params[:starts_at], ends_at: params[:ends_at])
+      proposed_event = Event.new(starts_at: params[:starts_at], 
+                                 ends_at: params[:ends_at])
     end
 
     group = Group.find(params[:group_id])

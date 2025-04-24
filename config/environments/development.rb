@@ -85,4 +85,7 @@ Rails.application.configure do
 
   # Allow POST authenticity on Codespaces in dev
   config.action_controller.forgery_protection_origin_check = false
+
+  #set Amazon as cloud service for ActiveStorage
+  config.active_storage.service = :amazon
 end
