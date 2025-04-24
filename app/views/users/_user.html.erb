@@ -3,9 +3,14 @@
       <div class="card-body">
         <div class="d-flex justify-content-between">
           <% if user.avatar.attached? %>
-            <%= image_tag user.avatar, class: 'rounded-circle mr-2', width: 80, height: 80 %>
+            <%= image_tag user.avatar, class: 'rounded-circle mr-2',
+              width: 80, height: 80 %>
           <% elsif user.image %>
-            <%= image_tag user.image, class: 'rounded-circle mr-2', width: 80, height: 80 %>
+            <%= image_tag user.image, class: 'rounded-circle mr-2', 
+              width: 80, height: 80 %>
+          <% else %>
+            <%= image_tag("/default_avatar.jpg", alt: "Default avatar", 
+              class: 'rounded-circle mr-2', width: 80, height: 80) %>
           <% end %>
           <div class="card-text">
             <div class="d-flex justify-content-end">

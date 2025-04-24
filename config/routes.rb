@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   resources :groups, except: [:index] do
     resources :enrollments, only: [:create, :destroy]
   end
-  get("/events/check_conflicts", { :controller => "events", :action => "check_conflicts" })
+  get("/events/check_conflicts", { :controller => "events", 
+                                   :action => "check_conflicts" })
   resources :events, except: [:index]
   resources :messages, only: [:show, :new, :create]
 
