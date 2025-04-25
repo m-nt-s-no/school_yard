@@ -30,16 +30,10 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     #name, role, avatar permitted on user signup
-    devise_parameter_sanitizer.permit(
-      :sign_up,
-      { :keys => [:name, :role, :avatar] }
-    )
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :role, :avatar])
 
     #only avatar permitted on user update
     #since we don't have way to change name or role for now
-    devise_parameter_sanitizer.permit(
-      :account_update,
-      { :keys => [:avatar] }
-    )
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:avatar])
   end
 end
