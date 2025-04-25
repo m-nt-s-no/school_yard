@@ -1,4 +1,13 @@
 
+#took out this code from new user signup form
+#branch where I was working on a fix having credentials issue
+#so merging is problematic
+=begin
+      <%= f.file_field :avatar,
+                   required: false,
+                   hint: "upload a profile avatar" %>
+=end
+
 #took out this code from users controller, better suited for "admin" role 
 =begin
   def calendar
