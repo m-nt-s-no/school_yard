@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :display_navbar?
 
   def display_navbar?
-    # Returns false if the current controller and action is the landing page
+    #Doesn't display navbar on the landing page to keep it internal
     !(controller_name == 'page' && action_name == 'landing')
   end
 
@@ -29,6 +29,17 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :role])
+    #name, role, avatar permitted on user signup
+    devise_parameter_sanitizer.permit(
+      :sign_up,
+      { :keys => [:name, :role, :avatar] }
+    )
+
+    #only avatar permitted on user update
+    #since we don't have way to change name or role for now
+    devise_parameter_sanitizer.permit(
+      :account_update,
+      { :keys => [:avatar] }
+    )
   end
 end

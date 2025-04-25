@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ index show update events groups messages calendar ]
-  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def index
     if @user.role == "teacher"
@@ -60,14 +59,5 @@ class UsersController < ApplicationController
     else
       @user = current_user
     end
-  end
-
-  protected
-
-  def configure_permitted_parameters
-    # allow avatar on sign up
-    devise_parameter_sanitizer.permit(:sign_up, keys: ["avatar"])
-    # allow avatar on account update
-    devise_parameter_sanitizer.permit(:account_update, keys: ["avatar"])
   end
 end
