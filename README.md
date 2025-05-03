@@ -64,5 +64,7 @@ All rights reserved for now, but I don't want to discourage collaboration so thi
 ## Contact
 
 Max J. Montesino - [mjmontesino88@gmail.com](mailto:mjmontesino88@gmail.com)
+
 Project Link: [https://github.com/m-nt-s-no/school_yard](https://github.com/m-nt-s-no/school_yard)
+
 Domain Name: [https://schoolyard.dev/](https://schoolyard.dev/)
