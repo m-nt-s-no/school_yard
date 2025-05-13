@@ -12,11 +12,12 @@ Rails.application.routes.draw do
   resources :groups, except: [:index] do
     resources :enrollments, only: [:create, :destroy]
   end
-  get("/events/check_conflicts", { :controller => "events", 
+  get("/events/check_conflicts", { :controller => "events",
                                    :action => "check_conflicts" })
   resources :events, except: [:index]
   resources :messages, only: [:show, :new, :create]
 
+  # NOTE: cool rake test
   get("/rake_tasks", { :controller => "rake_tasks", :action => "show" })
   get("/run_task", { :controller => "rake_tasks", :action => "run_task" })
 
@@ -27,5 +28,4 @@ Rails.application.routes.draw do
   get ":slug/calendar" => "users#calendar", as: :my_calendar
   get ":slug" => "users#show", as: :user
   post("/:slug", { :controller => "users", :action => "update" })
-
 end

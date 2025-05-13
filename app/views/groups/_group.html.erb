@@ -14,7 +14,7 @@
     <%= group.enrollments_count %>
   </p>
 
-  <% if policy(group).show_members? %>
+  <% if policy(group).show_members? %> <%# NOTE: Noice %>
     <ul class="list-group list-group-flush">
       <strong>Members:</strong>
       <% group.members.each do |member| %>

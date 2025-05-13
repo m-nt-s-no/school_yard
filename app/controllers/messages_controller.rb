@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: %i[ show destroy ]
-
+  # NOTE: Nice clean controller
+  
   # GET /messages/1 or /messages/1.json
   def show
     authorize @message

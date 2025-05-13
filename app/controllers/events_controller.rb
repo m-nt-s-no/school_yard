@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
-
+  # NOTE: good job on using pundit 
+  
   # GET /events or /events.json
   def index
     @events = Event.all
@@ -80,7 +81,7 @@ class EventsController < ApplicationController
     group = Group.find(params[:group_id])
     group_members = group.members
 
-    conflict_detector = PossibleEventConflictDetector.new(proposed_event, group_members)
+    conflict_detector = PossibleEventConflictDetector.new(proposed_event, group_members) # NOTE: Nice!!
     conflicting_member_count = conflict_detector.detect_member_conflicts
 
     respond_to do |format|

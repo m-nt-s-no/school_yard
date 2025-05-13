@@ -4,7 +4,7 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/new
   def new
     @enrollment = Enrollment.new
-    authorize @enrollment
+    authorize @enrollment # NOTE: could be DRY, by putting it in before action 
   end
 
   # POST /enrollments or /enrollments.json

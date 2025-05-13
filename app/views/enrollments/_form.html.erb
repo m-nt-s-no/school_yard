@@ -1,4 +1,4 @@
-
+<%# NOTE: We encourage to use `form_with` rather than `simple_form_for` %>
 <%= simple_form_for(@enrollment) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>

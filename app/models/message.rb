@@ -20,6 +20,7 @@
 #  fk_rails_...  (sender_id => users.id)
 #
 class Message < ApplicationRecord
+  # NOTE: Good job on the counter_cache
   belongs_to :sender, class_name: "User", counter_cache: :sent_messages_count
   belongs_to :recipient, class_name: "User", counter_cache: :received_messages_count
   validates :content, presence: true

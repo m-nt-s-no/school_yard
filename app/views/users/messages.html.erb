@@ -24,7 +24,7 @@
         </div>
         <div class="card-body">
           <ul class="list-group list-group-flush">
-          <% @received_msgs.each do |msg| %>
+            <% @received_msgs.each do |msg| %>
               <li class="list-group-item list-group-item-action">
                 <div class="d-flex align-items-center justify-content-between">
                   <% if msg.sender.image %>
@@ -34,7 +34,7 @@
                   <em><%= time_ago_in_words(msg.created_at) %> ago</em>
                 </div>
               </li>
-          <% end %>
+            <% end %>
           </ul>
         </div>
       </div>
@@ -46,7 +46,7 @@
         </div>
         <div class="card-body">
           <ul class="list-group list-group-flush">
-          <% @sent_msgs.each do |msg| %>
+            <% @sent_msgs.each do |msg| %>
               <li class="list-group-item list-group-item-action">
                 <div class="d-flex align-items-center justify-content-between">
                   <% if msg.recipient.image %>
@@ -56,7 +56,7 @@
                   <em><%= time_ago_in_words(msg.created_at) %> ago</em>
                 </div>
               </li>
-          <% end %>
+            <% end %>
           </ul>
         </div>
       </div>

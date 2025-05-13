@@ -3,7 +3,7 @@
     <div class="mb-2">
       <ul class="nav nav-pills nav-justified">
         <li class="nav-item">
-            <%= link_to "My events", my_events_path(@user.slug), class: "nav-link" %>
+          <%= link_to "My events", my_events_path(@user.slug), class: "nav-link" %>
         </li>
         <li class="nav-item">
           <%= link_to "My messages", my_messages_path(@user.slug), class: "nav-link" %>
@@ -17,29 +17,29 @@
       </ul>
     </div>
 
-      <%= month_calendar(attribute: :starts_at, end_attribute: :ends_at) do |date| %>
-        <div class="card <%= 'bg-primary text-white'if date.today? %>">
-          <div class="card-body">
-            <h6 class="card-title">
-              <%= date.day %>
-            </h6>
-            <div class="card-text">
-              <% @user.calendar.each do |event| %>
-                <% if event.starts_at.to_date == date %>
-                  <div>
-                    <%= link_to event_path(event), aria: { label: event.name } do %>
-                      <% if date.today? %>
-                        <i class="fa-solid fa-check" style="color: #fafafa;"></i>
-                      <% else %>
-                        <i class="fa-solid fa-check"></i>
-                      <% end %>
+    <%= month_calendar(attribute: :starts_at, end_attribute: :ends_at) do |date| %>
+      <div class="card <%= 'bg-primary text-white'if date.today? %>">
+        <div class="card-body">
+          <h6 class="card-title">
+            <%= date.day %>
+          </h6>
+          <div class="card-text">
+            <% @user.calendar.each do |event| %>
+              <% if event.starts_at.to_date == date %>
+                <div>
+                  <%= link_to event_path(event), aria: { label: event.name } do %>
+                    <% if date.today? %>
+                      <i class="fa-solid fa-check" style="color: #fafafa;"></i>
+                    <% else %>
+                      <i class="fa-solid fa-check"></i>
                     <% end %>
-                  </div>
-                <% end %>
+                  <% end %>
+                </div>
               <% end %>
-            </div>
+            <% end %>
           </div>
         </div>
-      <% end %>
+      </div>
+    <% end %>
   </div>
 </div>

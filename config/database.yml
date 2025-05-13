@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: rails_template_development
+  database: rails_template_development # NOTE: good practice to change the name of the databases to match the project
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
