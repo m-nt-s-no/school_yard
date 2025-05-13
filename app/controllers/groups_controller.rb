@@ -74,6 +74,7 @@ class GroupsController < ApplicationController
       @group = Group.find(params[:id])
     end
 
+    # NOTE: This could be in the policy, and you already have it 
     # Only a group's leader can destroy, update, or edit a group
     def ensure_current_user_is_group_leader
       if current_user != @group.leader

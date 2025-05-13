@@ -3,6 +3,7 @@
     <%= render @event %>
 
     <div>
+      <%# NOTE: since you have a policy for this, you could use the scope of the event policy %>
       <% if current_user == @event.group.leader %>
         <div class="d-flex align-items-center justify-content-between">
           <div class="btn btn-outline-primary">

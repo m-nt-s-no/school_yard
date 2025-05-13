@@ -30,7 +30,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  enum role: {guardian: "guardian", teacher: "teacher"}
+  enum role: {guardian: "guardian", teacher: "teacher"} # NOTE: noice
   validates :name, presence: true
   validates :role, presence: true
 
@@ -42,7 +42,7 @@ class User < ApplicationRecord
   has_many :calendar, through: :membership_groups, source: :events
   has_one_attached :avatar
 
-  before_save :generate_unique_slug
+  before_save :generate_unique_slug # NOTE: nice call back!
   def generate_unique_slug
     base_slug = name.parameterize
     unique_slug = base_slug
@@ -56,8 +56,7 @@ class User < ApplicationRecord
     self.slug = unique_slug
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    #filtering by name only
-    ["name"]
-  end
+  # NOTE: we move this to a concern "User::Ransackable"
+  # https://api.rubyonrails.org/classes/ActiveSupport/Concern.html
+  include Ransackable
 end

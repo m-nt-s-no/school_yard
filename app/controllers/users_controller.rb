@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
   def update
     authorize @user
-    if @user == current_user
+    if @user == current_user # NOTE: seems like you are already checking if `user == current_user` in the user_policy
       avatar_file = params.fetch("user").fetch("avatar")
       @user.avatar.attach({
         :io => avatar_file.tempfile,
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
   def events
     authorize @user
-    @conflicts = EventConflictDetector.new(@user.calendar).detect_event_conflicts
+    @conflicts = EventConflictDetector.new(@user.calendar).detect_event_conflicts # NOTE: Nice service
   end
 
   def groups

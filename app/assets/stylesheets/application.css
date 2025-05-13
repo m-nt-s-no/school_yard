@@ -13,10 +13,13 @@
  *= require_tree .
  *= require_self
  */
- .simple-calendar .calendar-heading {
+ 
+ /* NOTE: make sure the indents are consistent */
+.simple-calendar .calendar-heading {
   justify-content: center;
- }
- .simple-calendar .calendar-title {
+}
+
+.simple-calendar .calendar-title {
   font-weight: bold;
   display: block;
   text-align: center;

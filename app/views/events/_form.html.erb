@@ -22,6 +22,9 @@
   <% end %>
 </div>
 
+<%# NOTE: this validation could go into the backend when they submit the form %>
+<%# NOTE: For other client side, recommend using ajax or stimulus, so you don't have to worry about turbo load listener and your javascript will be better organized %>
+<%# NOTE: this wasn't obvious to us right away, so we would like to see comments to help other dev understand %>
 <%= content_for :javascript do %>
 <script>
 document.addEventListener('turbo:load', function() {

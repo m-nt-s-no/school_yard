@@ -24,27 +24,27 @@
         </div>
         <div class="card-body">
           <ul class="list-group list-group-flush">
-          <% @user.membership_groups.each do |group| %>
-            <% next if group.upcoming_events.count == 0 %>
+            <% @user.membership_groups.each do |group| %>
+              <% next if group.upcoming_events.count == 0 %>
               <div class="fw-bold">
                 <%= "#{group.name}" %>
               </div>
-            <% group.upcoming_events.each do |event| %>
-              <li class="list-group-item list-group-item-action">
-                <div class="d-flex align-items-center justify-content-between">
+              <% group.upcoming_events.each do |event| %>
+                <li class="list-group-item list-group-item-action">
                   <div class="d-flex align-items-center justify-content-between">
-                    <%= link_to "#{event.name}", event %>
-                    <% if @conflicts.include?(event) %>
-                      <div style="margin-left:10px">
-                        <strong> time conflict</strong>
-                      </div>
-                    <% end %>
+                    <div class="d-flex align-items-center justify-content-between">
+                      <%= link_to "#{event.name}", event %>
+                      <% if @conflicts.include?(event) %>
+                        <div style="margin-left:10px">
+                          <strong> time conflict</strong>
+                        </div>
+                      <% end %>
+                    </div>
+                    <em>in <%= time_ago_in_words(event.starts_at) %></em>
                   </div>
-                  <em>in <%= time_ago_in_words(event.starts_at) %></em>
-                </div>
-              </li>
+                </li>
+              <% end %>
             <% end %>
-          <% end %>
           </ul>
         </div>
       </div>
@@ -57,29 +57,29 @@
         </div>
         <div class="card-body">
           <ul class="list-group list-group-flush">
-          <% @user.membership_groups.each do |group| %>
-            <% next if group.past_events.count == 0 %>
+            <% @user.membership_groups.each do |group| %>
+              <% next if group.past_events.count == 0 %>
               <div class="fw-bold">
                 <%= "#{group.name}" %>
               </div>
-            <% group.past_events.each do |event| %>
-              <li class="list-group-item list-group-item-action">
-                <div class="d-flex align-items-center justify-content-between">
-                  <%= link_to "#{event.name}", event %>
-                  <em><%= time_ago_in_words(event.ends_at) %> ago</em>
-                </div>
-              </li>
+              <% group.past_events.each do |event| %>
+                <li class="list-group-item list-group-item-action">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <%= link_to "#{event.name}", event %>
+                    <em><%= time_ago_in_words(event.ends_at) %> ago</em>
+                  </div>
+                </li>
+              <% end %>
             <% end %>
-          <% end %>
           </ul>
         </div>
       </div>
     </div>
 
     <% if policy(@user).show_create_link? %>
-        <div class="btn btn-outline-secondary btn-block">
-          <%= link_to "Create a new event", new_event_path(Event.new) %>
-        </div>
+      <div class="btn btn-outline-secondary btn-block">
+        <%= link_to "Create a new event", new_event_path(Event.new) %>
+      </div>
     <% end %>
   </div>
 </div>

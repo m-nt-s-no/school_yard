@@ -21,7 +21,7 @@
 
     <% if policy(@user).show_create_link? %>
       <div class="btn btn-outline-secondary btn-block">
-            <%= link_to "Create a new group", new_group_path(Group.new) %>
+        <%= link_to "Create a new group", new_group_path(Group.new) %>
       </div>
     <% end %>
   </div>
